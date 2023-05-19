@@ -1,6 +1,10 @@
 package lojaapp;
 
 import java.awt.BorderLayout;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Janela extends javax.swing.JFrame {
@@ -9,9 +13,14 @@ public class Janela extends javax.swing.JFrame {
     static Painel2 p2;
     static Painel3 p3 = new Painel3();;
     static Painel4 p4;
+    static Painel5 p5;
     
     public static ArrayList<Produto> produtosListados = new ArrayList<>();
     public static ArrayList<Produto> produtosVendidos = new ArrayList<>();
+    
+    static LocalTime horaInicio;
+    
+    public static ArrayList<Usuario> usuarios = new ArrayList<>();
     
     public Janela() {
         initComponents();
@@ -20,7 +29,34 @@ public class Janela extends javax.swing.JFrame {
         
         this.add(p1, BorderLayout.CENTER);
         this.pack();
+        pegarTempoInicioSessao();
     }
+    
+    public void pegarTempoInicioSessao() {
+        horaInicio = LocalTime.now();
+
+    }
+    
+    public static void pegarTempoFimSessao() {
+        while (true) {
+            try {
+                Thread.sleep(1000);
+                LocalTime horaFim = LocalTime.now();
+        
+                Duration duracao = Duration.between(horaInicio, horaFim);
+        
+                long duracaoHoras = duracao.toHours();
+                long duracaoMinutos = duracao.toMinutesPart();
+                long duracaoSegundos = duracao.toSecondsPart();
+        
+                System.out.println("hora: "+duracaoHoras+", minuto: "+duracaoMinutos+", segundo: "+duracaoSegundos);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
