@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.InputStream;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
@@ -44,6 +45,9 @@ public class Painel1 extends javax.swing.JPanel {
     JLabel labelBemVindo = new JLabel("Bem Vindo!");
     JLabel labelTexto1 = new JLabel("Faça login para acessar a");
     JLabel labelTexto2 = new JLabel("área de manegamento de recursos!");
+    
+    JPasswordField passwordField = new JPasswordField();
+    JTextField jTextField2 = new JTextField("Senha");
     
     public Painel1() {
         initComponents();
@@ -102,7 +106,6 @@ public class Painel1 extends javax.swing.JPanel {
         jPanel1.add(labelCriarConta);
 
         jTextField1.setBorder(null);
-        jTextField2.setBorder(null);
             
     }
     
@@ -130,6 +133,20 @@ public class Painel1 extends javax.swing.JPanel {
         labelTexto2.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 18));
         
         jLabelImagemFundo.add(labelTexto2);
+        
+        // teste
+        jTextField2.setBounds(525, 199, 100, 30);
+        jTextField2.setBorder(null);
+        jTextField2.setForeground(new Color(204,204,204));
+        jTextField2.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 14));
+        jPanel1.add(jTextField2);
+        
+        // TextField da senha
+        passwordField.setVisible(false);
+        passwordField.setBounds(525, 197, 100, 30);
+        passwordField.setEchoChar('*');
+        passwordField.setBorder(null);
+        jPanel1.add(passwordField);
         
     }
     
@@ -172,6 +189,14 @@ public class Painel1 extends javax.swing.JPanel {
             }
         });
         
+        jTextField2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                jTextField2.setVisible(false);
+                passwordField.setVisible(true);
+                passwordField.requestFocusInWindow();
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -183,7 +208,6 @@ public class Painel1 extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
 
@@ -199,11 +223,9 @@ public class Painel1 extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 34)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Login");
 
         jLabel5.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Esqueceu a senha?");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -220,15 +242,6 @@ public class Painel1 extends javax.swing.JPanel {
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField1MouseClicked(evt);
-            }
-        });
-
-        jTextField2.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText(" Senha");
-        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField2MouseClicked(evt);
             }
         });
 
@@ -277,12 +290,10 @@ public class Painel1 extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(524, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -295,18 +306,16 @@ public class Painel1 extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addGap(35, 35, 35)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(60, 60, 60)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBox1)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addGap(74, 74, 74)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
@@ -341,11 +350,16 @@ public class Painel1 extends javax.swing.JPanel {
 
         if (mostrarSenha == false) {
 
-            removerAsteriscoSenha();
-            //jTextField2.setText(senha);
+            /*char[] password = passwordField.getPassword();
+            String senha = new String(password);
+            System.out.println("Senha digitada: " + senha);*/
+            
+            passwordField.setEchoChar((char) 0);
+
         }
         else {
             //jTextField2.setText(asterisco);
+            passwordField.setEchoChar('*');
         }
 
         mostrarSenha = !mostrarSenha;
@@ -359,13 +373,6 @@ public class Painel1 extends javax.swing.JPanel {
         jTextField1.setForeground(Color.BLACK);
     }//GEN-LAST:event_jTextField1MouseClicked
 
-    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        // TextField senha
-        
-        jTextField2.setText("");
-        jTextField2.setForeground(Color.BLACK);
-    }//GEN-LAST:event_jTextField2MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
@@ -375,6 +382,5 @@ public class Painel1 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

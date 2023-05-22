@@ -1,11 +1,18 @@
 package lojaapp;
 
 import java.awt.BorderLayout;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Janela extends javax.swing.JFrame {
 
@@ -19,6 +26,8 @@ public class Janela extends javax.swing.JFrame {
     public static ArrayList<Produto> produtosListados = new ArrayList<>();
     public static ArrayList<Produto> produtosVendidos = new ArrayList<>();
     
+    public static ArrayList<Integer> temposDeSessao = new ArrayList<>();
+    
     static LocalTime horaInicio;
     
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
@@ -31,11 +40,73 @@ public class Janela extends javax.swing.JFrame {
         this.add(p1, BorderLayout.CENTER);
         this.pack();
         pegarTempoInicioSessao();
+        desserializar();
+    }
+    
+        public static void serializar() {
+        // instancia a classe de serialização
+        Dados dado = new Dados();
+        // cria o nome do arquivo de serialização
+        String nomeDoArquivo = "dados.ser";
+        
+        // pega os dados e bota no objeto
+        dado.setProdutosListados(Janela.produtosListados);
+        dado.setProdutosVendidos(Janela.produtosVendidos);
+        dado.setUsuarios(Janela.usuarios);
+        // ! faltou o tempo de seção !
+        
+        try {
+            FileOutputStream arquivo = new FileOutputStream(nomeDoArquivo);
+            ObjectOutputStream out = new ObjectOutputStream(arquivo);
+            out.writeObject(dado);
+            out.close();
+            arquivo.close();
+            
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void desserializar() {
+        
+        // pega o arquivo e atribui os arrayList deles nos dessa classe
+        
+        Dados dadosSerializados = null;
+        String nomeDoArquivo = "dados.ser";
+        
+        try {
+            FileInputStream arquivo = new FileInputStream(nomeDoArquivo);
+            ObjectInputStream in = new ObjectInputStream(arquivo);
+            
+            dadosSerializados = (Dados)in.readObject();
+            in.close();
+            arquivo.close();
+            
+            // atribui aos arrayList o que esta no arquivo serializado
+            produtosListados = dadosSerializados.getProdutosListados();
+            produtosVendidos = dadosSerializados.getProdutosVendidos();
+            usuarios = dadosSerializados.getUsuarios();
+            
+            // metodo para atualizar as listas e carregar os itens serialziados
+            atualizarListas();
+            
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        
+    }
+    
+    public void atualizarListas() {
+        p3.adicionarItensSerializados();
     }
     
     public void pegarTempoInicioSessao() {
         horaInicio = LocalTime.now();
-
     }
     
     public static void pegarTempoFimSessao() {

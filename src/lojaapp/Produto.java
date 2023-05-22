@@ -1,6 +1,8 @@
 package lojaapp;
 
-public class Produto {
+import java.io.Serializable;
+
+public class Produto implements Serializable {
     
    private String nome;
    // private data time - hora que foi adquirido
