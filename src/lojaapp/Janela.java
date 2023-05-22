@@ -14,6 +14,7 @@ public class Janela extends javax.swing.JFrame {
     static Painel3 p3 = new Painel3();;
     static Painel4 p4;
     static Painel5 p5;
+    static Painel6 p6;
     
     public static ArrayList<Produto> produtosListados = new ArrayList<>();
     public static ArrayList<Produto> produtosVendidos = new ArrayList<>();

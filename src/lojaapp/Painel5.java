@@ -2,6 +2,7 @@ package lojaapp;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class Painel5 extends javax.swing.JPanel {
@@ -125,12 +126,17 @@ public class Painel5 extends javax.swing.JPanel {
         // verifica se os campos foram preenchidos corertamente
         
         // cria o objeto e armazena os valores
-        
         Usuario u1 = new Usuario(usuario, senha);
         
         // adiciona ao arrayList
-        
         Janela.usuarios.add(u1);
+        
+        // mensagem que deu certo
+        JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!", "Agita", JOptionPane.INFORMATION_MESSAGE);
+        
+        // limpar campos
+        jTextField1.setText("");
+        jTextField2.setText("");
         
     }//GEN-LAST:event_jButton1MouseClicked
 
