@@ -15,9 +15,9 @@ import javax.swing.SwingUtilities;
 
 public class Painel2 extends javax.swing.JPanel {
 
-    float investimento=0;
-    float faturamento=0;
-    float lucro=0;
+    static float investimento;
+    static float faturamento;
+    static float lucro;
     
     // labels e paineis globais
     JLabel botaoNovaLevaProdutos = new JLabel("Nova leva");

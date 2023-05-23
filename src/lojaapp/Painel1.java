@@ -19,6 +19,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.InputStream;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -31,7 +32,6 @@ public class Painel1 extends javax.swing.JPanel {
     public static String usuario;
     public static int tamanhoSenha = 0;
     public static boolean mostrarSenha = false;
-    public static boolean jaFoi = false;
     
     // labels e paineis globais
     JLabel labelBotaoLogin = new JLabel("Login");
@@ -150,18 +150,6 @@ public class Painel1 extends javax.swing.JPanel {
         
     }
     
-    public void removerAsteriscoSenha() {
-        //if (senha.length() > this.senha.length()) {
-            
-        //}
-        if (jaFoi == true) {
-            
-        }
-        else {
-            senha = senha.replaceAll("\\*", "");
-        }
-    }
-    
     public void colocarImagens() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\alunolages\\Documents\\LojaApp\\LojaRoupaApp\\src\\lojaapp\\imagens\\essa.png");
         
@@ -172,6 +160,22 @@ public class Painel1 extends javax.swing.JPanel {
         
     }
     
+    public boolean validarDados(String user, String senha) {
+        
+        if (Janela.usuarios.isEmpty()) {
+            return false;
+        }
+        else {
+            for (int i=0;i<Janela.usuarios.size();i++) {
+                if ((user.equals(Janela.usuarios.get(i).getUsuario()) || user.equals(Janela.usuarios.get(i).getEmail())) && senha.equals(Janela.usuarios.get(i).getSenha())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+    }
+    
     public void config() {
         
         // Quando o painel LOGIN é clicado
@@ -179,12 +183,30 @@ public class Painel1 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                // passa para o proximo painel
-                Janela.p2 = new Painel2();
-                JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
-                janela.getContentPane().remove(Janela.p1);
-                janela.add(Janela.p2, BorderLayout.CENTER);
-                janela.pack();
+                // verifica se os dados de login são validos
+                
+                // pega os inputs
+                String user = jTextField1.getText();
+                String senha = new String(passwordField.getPassword());
+                
+                // valida os inputs
+                if (validarDados(user, senha) == false) {
+                    JOptionPane.showMessageDialog(null, "Usuário inválido!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    
+                    // Transição
+                
+                    Janela.t1 = new Transicao();
+                    JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
+                    janela.getContentPane().remove(Janela.p1);
+                    janela.add(Janela.t1, BorderLayout.CENTER);
+                    janela.pack();
+
+                    Thread thread = new Thread(Janela.t1);  // Passar a instância de Transicao, não Janela.t1
+                    thread.start();
+                
+                }
                 
             }
         });
@@ -197,6 +219,18 @@ public class Painel1 extends javax.swing.JPanel {
                 passwordField.requestFocusInWindow();
             }
         });
+        
+        labelCriarConta.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Janela.p5 = new Painel5();
+                JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
+                janela.getContentPane().remove(Janela.p1);
+                janela.add(Janela.p5, BorderLayout.CENTER);
+                janela.pack();
+            }
+        });
+        
     }
 
     @SuppressWarnings("unchecked")

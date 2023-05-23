@@ -9,6 +9,10 @@ public class Dados implements Serializable {
     private ArrayList<Produto> produtosVendidos = new ArrayList<>();
     private ArrayList<Usuario> usuarios = new ArrayList<>();
     private ArrayList<Integer> temposDeSessao = new ArrayList<>();
+    
+    private float investimento;
+    private float faturamento;
+    private float lucro;
 
     public Dados() {
     }
@@ -43,6 +47,30 @@ public class Dados implements Serializable {
 
     public void setTemposDeSessao(ArrayList<Integer> temposDeSessao) {
         this.temposDeSessao = temposDeSessao;
+    }
+
+    public float getInvestimento() {
+        return investimento;
+    }
+
+    public void setInvestimento(float investimento) {
+        this.investimento = investimento;
+    }
+
+    public float getFaturamento() {
+        return faturamento;
+    }
+
+    public void setFaturamento(float faturamento) {
+        this.faturamento = faturamento;
+    }
+
+    public float getLucro() {
+        return lucro;
+    }
+
+    public void setLucro(float lucro) {
+        this.lucro = lucro;
     }
     
 }

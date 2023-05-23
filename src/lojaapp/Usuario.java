@@ -8,9 +8,10 @@ public class Usuario implements Serializable {
     private String senha;
     private String email;
 
-    public Usuario(String ususario, String senha) {
+    public Usuario(String ususario, String senha, String email) {
         this.usuario = ususario;
         this.senha = senha;
+        this.email = email;
     }
 
     public String getEmail() {

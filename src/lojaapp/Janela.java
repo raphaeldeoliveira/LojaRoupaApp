@@ -1,6 +1,7 @@
 package lojaapp;
 
 import java.awt.BorderLayout;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.util.logging.Logger;
 
 public class Janela extends javax.swing.JFrame {
 
+    static Transicao t1;
+    
     static Painel1 p1;
     static Painel2 p2;
     static Painel3 p3 = new Painel3();;
@@ -53,6 +56,10 @@ public class Janela extends javax.swing.JFrame {
         dado.setProdutosListados(Janela.produtosListados);
         dado.setProdutosVendidos(Janela.produtosVendidos);
         dado.setUsuarios(Janela.usuarios);
+        
+        dado.setInvestimento(Janela.p2.investimento);
+        dado.setFaturamento(Janela.p2.faturamento);
+        dado.setLucro(Janela.p2.lucro);
         // ! faltou o tempo de seção !
         
         try {
@@ -70,33 +77,46 @@ public class Janela extends javax.swing.JFrame {
     
     public void desserializar() {
         
-        // pega o arquivo e atribui os arrayList deles nos dessa classe
-        
-        Dados dadosSerializados = null;
-        String nomeDoArquivo = "dados.ser";
-        
-        try {
-            FileInputStream arquivo = new FileInputStream(nomeDoArquivo);
-            ObjectInputStream in = new ObjectInputStream(arquivo);
-            
-            dadosSerializados = (Dados)in.readObject();
-            in.close();
-            arquivo.close();
-            
-            // atribui aos arrayList o que esta no arquivo serializado
-            produtosListados = dadosSerializados.getProdutosListados();
-            produtosVendidos = dadosSerializados.getProdutosVendidos();
-            usuarios = dadosSerializados.getUsuarios();
-            
-            // metodo para atualizar as listas e carregar os itens serialziados
-            atualizarListas();
+        // verifica se o arquivo serializado existe. Se existir desserializa
+        String caminhoArquivo = "dados.ser";
+        File arquivoTeste = new File(caminhoArquivo);
+        if (arquivoTeste.exists() == false) {
             
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+        else {
+            // pega o arquivo e atribui os arrayList deles nos dessa classe
+        
+            Dados dadosSerializados = null;
+            String nomeDoArquivo = "dados.ser";
+
+            try {
+                FileInputStream arquivo = new FileInputStream(nomeDoArquivo);
+                ObjectInputStream in = new ObjectInputStream(arquivo);
+
+                dadosSerializados = (Dados)in.readObject();
+                in.close();
+                arquivo.close();
+
+                // atribui aos arrayList o que esta no arquivo serializado
+                produtosListados = dadosSerializados.getProdutosListados();
+                produtosVendidos = dadosSerializados.getProdutosVendidos();
+                usuarios = dadosSerializados.getUsuarios();
+
+                // atribui as vaiaveis o que estava no arquivo serializado
+                Janela.p2.investimento = dadosSerializados.getInvestimento();;
+                Janela.p2.faturamento= dadosSerializados.getFaturamento();;
+                Janela.p2.lucro = dadosSerializados.getLucro();;
+
+                // metodo para atualizar as listas e carregar os itens serialziados
+                atualizarListas();
+
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
+            }
         }
         
     }
