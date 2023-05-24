@@ -35,10 +35,8 @@ public class Painel5 extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(217, 50, 128));
         jLabel1.setText("Cadastrar Usuários");
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Usuário: ");
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Senha: ");
 
         jButton1.setText("Cadastrar");
@@ -55,7 +53,6 @@ public class Painel5 extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Email: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -80,7 +77,7 @@ public class Painel5 extends javax.swing.JPanel {
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 289, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLabel3)
@@ -113,7 +110,7 @@ public class Painel5 extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -162,6 +159,9 @@ public class Painel5 extends javax.swing.JPanel {
         
         // faz a serialização
         Janela.serializar();
+        
+        // atualiza o painel de usuarios cadastrados (p7)
+        Janela.p7.carregarUsuariosAdicionados(usuario);
         
     }//GEN-LAST:event_jButton1MouseClicked
 

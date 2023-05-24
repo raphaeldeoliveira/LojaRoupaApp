@@ -189,25 +189,35 @@ public class Painel1 extends javax.swing.JPanel {
                 String user = jTextField1.getText();
                 String senha = new String(passwordField.getPassword());
                 
-                // valida os inputs
-                if (validarDados(user, senha) == false) {
-                    JOptionPane.showMessageDialog(null, "Usuário inválido!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else {
-                    
-                    // Transição
+                jTextField1.setText("");
+                passwordField.setText(String.valueOf(""));
                 
-                    Janela.t1 = new Transicao();
+                // valida os inputs
+                if (user.equals("admin") && senha.equals("admin")) {
                     JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                     janela.getContentPane().remove(Janela.p1);
-                    janela.add(Janela.t1, BorderLayout.CENTER);
+                    janela.add(Janela.p7, BorderLayout.CENTER);
                     janela.pack();
-
-                    Thread thread = new Thread(Janela.t1);  // Passar a instância de Transicao, não Janela.t1
-                    thread.start();
-                
                 }
-                
+                else {
+                    if (validarDados(user, senha) == false) {
+                        JOptionPane.showMessageDialog(null, "Usuário inválido!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else {
+
+                        // Transição
+
+                        Janela.t1 = new Transicao();
+                        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
+                        janela.getContentPane().remove(Janela.p1);
+                        janela.add(Janela.t1, BorderLayout.CENTER);
+                        janela.pack();
+
+                        Thread thread = new Thread(Janela.t1);  // Passar a instância de Transicao, não Janela.t1
+                        thread.start();
+
+                    }
+                }
             }
         });
         
@@ -240,7 +250,6 @@ public class Painel1 extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -258,17 +267,6 @@ public class Painel1 extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 34)); // NOI18N
         jLabel3.setText("Login");
-
-        jLabel5.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 12)); // NOI18N
-        jLabel5.setText("Esqueceu a senha?");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel5MouseExited(evt);
-            }
-        });
 
         jTextField1.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(204, 204, 204));
@@ -315,9 +313,7 @@ public class Painel1 extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel5)
-                        .addGap(7, 7, 7))
+                        .addGap(142, 142, 142))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(264, 264, 264)))
@@ -343,9 +339,7 @@ public class Painel1 extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jLabel5))
+                        .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -365,19 +359,6 @@ public class Painel1 extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-        // botao esqueceu a senha
-
-        jLabel5.setForeground(Color.black);
-    }//GEN-LAST:event_jLabel5MouseExited
-
-    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
-        // botao esqueceu a senha
-
-        jLabel5.setForeground(Color.gray);
-
-    }//GEN-LAST:event_jLabel5MouseEntered
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
         // botao mostrar senha
@@ -411,7 +392,6 @@ public class Painel1 extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

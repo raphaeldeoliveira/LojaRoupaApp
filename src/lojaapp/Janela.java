@@ -21,10 +21,11 @@ public class Janela extends javax.swing.JFrame {
     
     static Painel1 p1;
     static Painel2 p2;
-    static Painel3 p3 = new Painel3();;
+    static Painel3 p3 = new Painel3();
     static Painel4 p4;
     static Painel5 p5;
     static Painel6 p6;
+    static Painel7 p7 = new Painel7();
     
     public static ArrayList<Produto> produtosListados = new ArrayList<>();
     public static ArrayList<Produto> produtosVendidos = new ArrayList<>();
@@ -46,7 +47,7 @@ public class Janela extends javax.swing.JFrame {
         desserializar();
     }
     
-        public static void serializar() {
+    public static void serializar() {
         // instancia a classe de serialização
         Dados dado = new Dados();
         // cria o nome do arquivo de serialização
@@ -80,10 +81,8 @@ public class Janela extends javax.swing.JFrame {
         // verifica se o arquivo serializado existe. Se existir desserializa
         String caminhoArquivo = "dados.ser";
         File arquivoTeste = new File(caminhoArquivo);
-        if (arquivoTeste.exists() == false) {
-            
-        }
-        else {
+        
+        if (arquivoTeste.exists() == true) {
             // pega o arquivo e atribui os arrayList deles nos dessa classe
         
             Dados dadosSerializados = null;
@@ -106,6 +105,7 @@ public class Janela extends javax.swing.JFrame {
                 Janela.p2.investimento = dadosSerializados.getInvestimento();;
                 Janela.p2.faturamento= dadosSerializados.getFaturamento();;
                 Janela.p2.lucro = dadosSerializados.getLucro();;
+                Janela.p7.carregarUsuariosSerializados(usuarios);
 
                 // metodo para atualizar as listas e carregar os itens serialziados
                 atualizarListas();

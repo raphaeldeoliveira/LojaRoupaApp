@@ -63,11 +63,13 @@ public class Painel4 extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(217, 50, 128));
         jLabel1.setText("Adicionar items!");
 
-        jPanel2.setBackground(new java.awt.Color(0, 255, 102));
+        jPanel2.setBackground(new java.awt.Color(217, 50, 128));
 
+        jRadioButton3.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup2.add(jRadioButton3);
         jRadioButton3.setText("Masculino");
 
+        jRadioButton4.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("Feminino");
 
@@ -92,26 +94,33 @@ public class Painel4 extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 0, 0));
+        jPanel3.setBackground(new java.awt.Color(217, 50, 128));
 
+        jRadioButton5.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton5);
         jRadioButton5.setText("Calça");
 
+        jRadioButton6.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton6);
         jRadioButton6.setText("Camiseta");
 
+        jRadioButton7.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton7);
         jRadioButton7.setText("Tênis");
 
+        jRadioButton8.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton8);
         jRadioButton8.setText("Casaco");
 
+        jRadioButton9.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton9);
         jRadioButton9.setText("Meia");
 
+        jRadioButton10.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton10);
         jRadioButton10.setText("Acessórios");
 
+        jRadioButton11.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton11);
         jRadioButton11.setText("Roupa Intima");
 
@@ -136,7 +145,7 @@ public class Painel4 extends javax.swing.JPanel {
                         .addComponent(jRadioButton10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton11)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +253,7 @@ public class Painel4 extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(15, 15, 15))
         );
