@@ -46,8 +46,9 @@ public class Painel1 extends javax.swing.JPanel {
     JLabel labelTexto1 = new JLabel("Faça login para acessar a");
     JLabel labelTexto2 = new JLabel("área de manegamento de recursos!");
     
-    JPasswordField passwordField = new JPasswordField();
-    JTextField jTextField2 = new JTextField("Senha");
+    static JPasswordField passwordField = new JPasswordField();
+    static JTextField jTextField1 = new JTextField("Usuario ou Email");
+    static JTextField jTextField2 = new JTextField("Senha");
     
     public Painel1() {
         initComponents();
@@ -55,6 +56,14 @@ public class Painel1 extends javax.swing.JPanel {
         adicionarLabelsAImagem();
         deixarVerticesArredondados();
         config();
+    }
+    
+    public static void deixarTextFieldsPadrao() {
+        jTextField2.setVisible(true);
+        passwordField.setVisible(false);
+        
+        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
+            jTextField1.setText("Usuario ou Email");
     }
     
     public void deixarVerticesArredondados() {
@@ -135,7 +144,7 @@ public class Painel1 extends javax.swing.JPanel {
         jLabelImagemFundo.add(labelTexto2);
         
         // teste
-        jTextField2.setBounds(525, 199, 100, 30);
+        jTextField2.setBounds(525, 199, 195, 30);
         jTextField2.setBorder(null);
         jTextField2.setForeground(new Color(204,204,204));
         jTextField2.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 14));
@@ -143,10 +152,17 @@ public class Painel1 extends javax.swing.JPanel {
         
         // TextField da senha
         passwordField.setVisible(false);
-        passwordField.setBounds(525, 197, 100, 30);
+        passwordField.setBounds(525, 197, 195, 30);
         passwordField.setEchoChar('*');
         passwordField.setBorder(null);
         jPanel1.add(passwordField);
+        
+        // TextField do usuario
+        jTextField1.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
+        jTextField1.setText("Usuario ou Email");
+        jTextField1.setBounds(525, 150, 195, 30);
+        jPanel1.add(jTextField1);
         
     }
     
@@ -241,6 +257,14 @@ public class Painel1 extends javax.swing.JPanel {
             }
         });
         
+        jTextField1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                jTextField1.setText("");
+                jTextField1.setForeground(Color.BLACK);
+            }
+        });
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -250,7 +274,6 @@ public class Painel1 extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
 
@@ -267,15 +290,6 @@ public class Painel1 extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 34)); // NOI18N
         jLabel3.setText("Login");
-
-        jTextField1.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Usuario ou Email");
-        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField1MouseClicked(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -320,30 +334,23 @@ public class Painel1 extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(524, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(118, 118, 118))))
+                .addContainerGap(563, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(118, 118, 118))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(74, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(35, 35, 35)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(122, 122, 122)
                         .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(136, 136, 136)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
@@ -381,13 +388,6 @@ public class Painel1 extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
-    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        // TextField usuario ou email
-        
-        jTextField1.setText("");
-        jTextField1.setForeground(Color.BLACK);
-    }//GEN-LAST:event_jTextField1MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
@@ -395,6 +395,5 @@ public class Painel1 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

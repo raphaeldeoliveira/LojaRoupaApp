@@ -233,6 +233,10 @@ public class Painel7 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
+                // atualiza os 2 textField para o padrao
+                Janela.p1.deixarTextFieldsPadrao();
+                
+                // passa para o painel 1
                 JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                 janela.getContentPane().remove(Janela.p7);
                 janela.add(Janela.p1, BorderLayout.CENTER);

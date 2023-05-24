@@ -67,10 +67,12 @@ public class Painel4 extends javax.swing.JPanel {
 
         jRadioButton3.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup2.add(jRadioButton3);
+        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("Masculino");
 
         jRadioButton4.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup2.add(jRadioButton4);
+        jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("Feminino");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -98,30 +100,37 @@ public class Painel4 extends javax.swing.JPanel {
 
         jRadioButton5.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton5);
+        jRadioButton5.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton5.setText("Calça");
 
         jRadioButton6.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton6);
+        jRadioButton6.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton6.setText("Camiseta");
 
         jRadioButton7.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton7);
+        jRadioButton7.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton7.setText("Tênis");
 
         jRadioButton8.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton8);
+        jRadioButton8.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton8.setText("Casaco");
 
         jRadioButton9.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton9);
+        jRadioButton9.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton9.setText("Meia");
 
         jRadioButton10.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton10);
+        jRadioButton10.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton10.setText("Acessórios");
 
         jRadioButton11.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup3.add(jRadioButton11);
+        jRadioButton11.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton11.setText("Roupa Intima");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
