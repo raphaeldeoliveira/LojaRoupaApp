@@ -18,9 +18,13 @@ public class RelatorioDaLeva implements Serializable {
     private float percentualDevolucao;
     private float percentualExtravio;
     
-    private float investimentoCampanha;
-    private float faturamentoCampanha;
-    private float lucroCampanha;
+    private float investimentoCampanhaReal;
+    private float faturamentoCampanhaReal;
+    private float lucroCampanhaReal;
+    
+    private float investimentoCampanhaEsperado;
+    private float faturamentoCampanhaEsperado;
+    private float lucroCampanhaEsperado; 
     
     
 }

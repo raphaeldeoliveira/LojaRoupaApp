@@ -3,3 +3,19 @@ reais. Ou seja, o investimento vai ser o total gasto e o
 faturamento e lucro só devem ser incrementados caso a peça seja
 vendida. Dentro do painel detalhamento terá o lucro e faturamento
 previstos, que é o que atualmente esta mostrando no painel2
+
+2. Deixar os valores apos a virgula em somente duas casas: 
+
+import java.text.DecimalFormat;
+
+public class ExemploFormatarFloat {
+
+    public static void main(String[] args) {
+        float resultado = 3.14159f * 2.0f;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        String resultadoFormatado = df.format(resultado);
+        
+        System.out.println(resultadoFormatado);
+    }
+}

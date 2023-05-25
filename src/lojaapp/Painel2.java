@@ -170,10 +170,12 @@ public class Painel2 extends javax.swing.JPanel {
             public void mouseClicked(MouseEvent e) {
                 int resposta = JOptionPane.showOptionDialog(null,"Deseja continuar?","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
         
-                if (resposta != JOptionPane.YES_OPTION) {
-
+                if (resposta == JOptionPane.YES_OPTION) {
+                   
+                    Janela.criarRelatorioDaLeva();
+                    
                 } else {
-                    System.out.println("Você escolheu Sim.");
+                    
                 }
 
                 // cria um arquivo txt com os seguintes dados:
@@ -211,7 +213,7 @@ public class Painel2 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // passa para o painel de detalhamento
-                Janela.p6 = new Painel6(investimento, faturamento, lucro);
+                Janela.p6 = new Painel6(investimento, faturamento, lucro, investimento, faturamento, lucro);
                 JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                 janela.getContentPane().remove(Janela.p2);
                 janela.add(Janela.p6, BorderLayout.CENTER);
