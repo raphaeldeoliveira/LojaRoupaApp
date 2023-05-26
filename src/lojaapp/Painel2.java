@@ -31,9 +31,9 @@ public class Painel2 extends javax.swing.JPanel {
     
     public Painel2() {
         initComponents();
-        jLabel4.setText(String.valueOf(investimento));
-        jLabel5.setText(String.valueOf(faturamento));
-        jLabel6.setText(String.valueOf(lucro));
+        jLabel4.setText(String.valueOf(String.valueOf(investimento).substring(0, (String.valueOf(investimento).indexOf(".")) + 3)));
+        jLabel5.setText(String.valueOf(String.valueOf(faturamento).substring(0, (String.valueOf(faturamento).indexOf(".")) + 3)));
+        jLabel6.setText(String.valueOf(String.valueOf(lucro).substring(0, (String.valueOf(lucro).indexOf(".")) + 3)));
         definirData();
         botarLabels();
         config();
@@ -256,9 +256,9 @@ public class Painel2 extends javax.swing.JPanel {
         faturamento = faturamento + precoVenda;
         lucro = faturamento - investimento;
         
-        jLabel4.setText(String.valueOf(investimento));
-        jLabel5.setText(String.valueOf(faturamento));
-        jLabel6.setText(String.valueOf(lucro));
+        jLabel4.setText(String.valueOf(String.valueOf(investimento).substring(0, (String.valueOf(investimento).indexOf(".")) + 3)));
+        jLabel5.setText(String.valueOf(String.valueOf(faturamento).substring(0, (String.valueOf(faturamento).indexOf(".")) + 3)));
+        jLabel6.setText(String.valueOf(String.valueOf(lucro).substring(0, (String.valueOf(lucro).indexOf(".")) + 3)));
     }
 
     @SuppressWarnings("unchecked")
@@ -321,9 +321,11 @@ public class Painel2 extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("<lucro>");
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("<data>");
 
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("<hora>");
 
@@ -336,9 +338,9 @@ public class Painel2 extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -370,7 +372,7 @@ public class Painel2 extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
