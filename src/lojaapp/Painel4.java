@@ -178,6 +178,8 @@ public class Painel4 extends javax.swing.JPanel {
                 jTextField2.setText("");
                 jTextField3.setText("");
                 jSpinner1.setValue(1);
+                buttonGroup2.clearSelection();
+                buttonGroup3.clearSelection();
                 
             }
         });
