@@ -17,10 +17,12 @@ import javax.swing.SwingUtilities;
 public class Painel3 extends javax.swing.JPanel {
     
     public static DefaultListModel<String> listaProdutosListados = new DefaultListModel<>();
-    public static DefaultListModel<String> listaProdutosVazia = new DefaultListModel<>();
-    public DefaultListModel<String> listaProdutosTemp = new DefaultListModel<>();
+    public static DefaultListModel<String> listaProdutosListadosVazia = new DefaultListModel<>();
+    public DefaultListModel<String> listaProdutosListadosTemp = new DefaultListModel<>();
     
     public static DefaultListModel<String> listaProdutosVendidos = new DefaultListModel<>();
+    public static DefaultListModel<String> listaProdutosVendidosVazia = new DefaultListModel<>();
+    public DefaultListModel<String> listaProdutosVendidosTemp = new DefaultListModel<>();
     
     JPanel paneInteracaoCentral = new JPanel();
     JPanel paneVoltar = new JPanel();
@@ -362,10 +364,10 @@ public class Painel3 extends javax.swing.JPanel {
                     }
                     for (int i=0;i<Janela.produtosListados.size();i++) {
                         if (Janela.produtosListados.get(i).getGenero().equals(genero) || Janela.produtosListados.get(i).getCategoria().equals(categoria)) {
-                            listaProdutosVazia.addElement(Janela.produtosListados.get(i).getNome());
+                            listaProdutosListadosVazia.addElement(Janela.produtosListados.get(i).getNome());
                         }
                     }
-                    jList1.setModel(listaProdutosVazia);
+                    jList1.setModel(listaProdutosListadosVazia);
                     
                 }
                 
@@ -563,6 +565,11 @@ public class Painel3 extends javax.swing.JPanel {
         jTextField1.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setText("Barra de busca");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField1MouseClicked(evt);
@@ -581,9 +588,31 @@ public class Painel3 extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Lista de produtos vendidos");
 
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jList2);
 
+        jTextField2.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
         jTextField2.setText("Barra de busca");
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField2FocusLost(evt);
+            }
+        });
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -700,27 +729,25 @@ public class Painel3 extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(280, 280, 280)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(227, 227, 227)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(143, 143, 143)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(280, 280, 280)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(227, 227, 227)
+                            .addComponent(jLabel3))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(143, 143, 143)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(53, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -733,7 +760,7 @@ public class Painel3 extends javax.swing.JPanel {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -744,11 +771,15 @@ public class Painel3 extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -785,7 +816,7 @@ public class Painel3 extends javax.swing.JPanel {
         jTextField1.setText("");
         
         // troca o model da lista por um model vazio
-        jList1.setModel(listaProdutosVazia);
+        jList1.setModel(listaProdutosListados);
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
@@ -816,15 +847,16 @@ public class Painel3 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        // barra de busca - key release
+        // barra de busca - key release - LISTADOS
+        jTextField1.setForeground(Color.BLACK);
         busca = jTextField1.getText();
         System.out.println("busca: "+busca);
         System.out.println("length" +busca.length());
         
         if (busca.equals("")) {
             jList1.setModel(listaProdutosListados);
-            listaProdutosVazia.removeAllElements();
-            listaProdutosTemp.removeAllElements();
+            listaProdutosListadosVazia.removeAllElements();
+            listaProdutosListadosTemp.removeAllElements();
             System.out.println("limpou");
             iniciou = false;
         }
@@ -832,33 +864,52 @@ public class Painel3 extends javax.swing.JPanel {
             if (iniciou == true) {
                 // executa pra somente um caracter
                 if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                    for (int i=0;i<listaProdutosTemp.size();i++) {
-                        if (String.valueOf(listaProdutosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
-                            listaProdutosVazia.addElement(listaProdutosTemp.get(i));
-                            listaProdutosTemp.remove(i);
-                            jList1.setModel(listaProdutosVazia);
+                    System.out.println("tamanho do listaProdutosTemp: "+listaProdutosListadosTemp.size());
+                    for (int i=0;i<listaProdutosListadosTemp.size();i++) {
+                        
+                        if (String.valueOf(listaProdutosListadosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                            listaProdutosListadosVazia.addElement(listaProdutosListadosTemp.get(i));
+                            listaProdutosListadosTemp.remove(i);
+                            jList1.setModel(listaProdutosListadosVazia);
+                            i--;
                         }
                     }
                 }
-
-                for (int i=0;i<listaProdutosVazia.size();i++) {
-                    if (!String.valueOf(listaProdutosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
-                        listaProdutosTemp.addElement(listaProdutosVazia.get(i));
-                        listaProdutosVazia.remove(i);
-                        jList1.setModel(listaProdutosVazia);
-                        System.out.println("listaTemp");
+                else {
+                    
+                    int tamanhoLista = listaProdutosListadosVazia.size();
+                    for (int i = tamanhoLista - 1; i >= 0; i--) {
+                        System.out.println("comparando: "+listaProdutosListadosVazia.get(i).charAt(busca.length()-1)+" -- "+busca.charAt(busca.length()-1));
+                        if (!String.valueOf(listaProdutosListadosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                            
+                            listaProdutosListadosTemp.addElement(listaProdutosListadosVazia.get(i));
+                            System.out.println("deletado: "+listaProdutosListadosVazia.remove(i));
+                            //listaProdutosVazia.remove(i);
+                           
+                            System.out.println("listaTemp");
+                        }
+                        else {
+                            System.out.println("ELSEZADA");
+                        }
+                        
+                        
                     }
-                    else {
-
+                    
+                    for (int i=0;i<listaProdutosListadosTemp.size();i++) {
+                        String item = listaProdutosListadosTemp.get(i);
+                        listaProdutosListadosVazia.removeElement(item);
                     }
+                    jList1.setModel(listaProdutosListadosVazia);
+                    
                 }
+                
             }
             else {
                 for (int i=0;i<Janela.produtosListados.size();i++) {
                     if (String.valueOf(Janela.produtosListados.get(i).getNome().toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
-                        listaProdutosVazia.addElement(Janela.produtosListados.get(i).getNome());
+                        listaProdutosListadosVazia.addElement(Janela.produtosListados.get(i).getNome());
                         iniciou = true;
-                        jList1.setModel(listaProdutosVazia);
+                        jList1.setModel(listaProdutosListadosVazia);
                         System.out.println("listaPadrao");
                     }
                 }
@@ -870,6 +921,116 @@ public class Painel3 extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        // barra de busca itens listados - focus LOST
+        jTextField1.setForeground(new Color(153, 153, 153));
+        
+        jTextField1.setText("Barra de busca");
+    }//GEN-LAST:event_jTextField1FocusLost
+
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
+        // LISTA DE VENDIDOS
+        
+        String selecionado = jList2.getSelectedValue();
+        
+        // acha onde esta o item selecionado
+        for (int i=0;i<Janela.produtosVendidos.size();i++) {
+            if (selecionado.equals(Janela.produtosVendidos.get(i).getNome())) {
+                jLabel13.setText("Feminino");
+                jLabel8.setText(Janela.produtosVendidos.get(i).getCategoria());
+                jLabel9.setText(String.valueOf(Janela.produtosVendidos.get(i).getPrecoCompra()));
+                jLabel10.setText(String.valueOf(Janela.produtosVendidos.get(i).getPrecoVenda()));
+                jLabel11.setText(String.valueOf(Janela.produtosVendidos.get(i).getLucro()));
+            }
+        }
+        
+    }//GEN-LAST:event_jList2MouseClicked
+
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+        // botao de busca da lista de produtos vendidos
+        jTextField2.setText("");
+        
+        // troca o model da lista por um model vazio
+        jList2.setModel(listaProdutosVendidos);
+    }//GEN-LAST:event_jTextField2MouseClicked
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        // barra de busca - key release - VENDIDOS
+        jTextField2.setForeground(Color.BLACK);
+        busca = jTextField2.getText();
+        System.out.println("busca: "+busca);
+        System.out.println("length" +busca.length());
+        
+        if (busca.equals("")) {
+            jList2.setModel(listaProdutosVendidos);
+            listaProdutosVendidosVazia.removeAllElements();
+            listaProdutosVendidosTemp.removeAllElements();
+            System.out.println("limpou");
+            iniciou = false;
+        }
+        else {
+            if (iniciou == true) {
+                // executa pra somente um caracter
+                if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    System.out.println("tamanho do listaProdutosTemp: "+listaProdutosListadosTemp.size());
+                    for (int i=0;i<listaProdutosVendidosTemp.size();i++) {
+                        
+                        if (String.valueOf(listaProdutosVendidosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                            listaProdutosVendidosVazia.addElement(listaProdutosVendidosTemp.get(i));
+                            listaProdutosVendidosTemp.remove(i);
+                            jList2.setModel(listaProdutosVendidosVazia);
+                            i--;
+                        }
+                    }
+                }
+                else {
+                    
+                    int tamanhoLista = listaProdutosVendidosVazia.size();
+                    for (int i = tamanhoLista - 1; i >= 0; i--) {
+                        System.out.println("comparando: "+listaProdutosVendidosVazia.get(i).charAt(busca.length()-1)+" -- "+busca.charAt(busca.length()-1));
+                        if (!String.valueOf(listaProdutosVendidosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                            
+                            listaProdutosVendidosTemp.addElement(listaProdutosVendidosVazia.get(i));
+                            System.out.println("deletado: "+listaProdutosVendidosVazia.remove(i));
+                            //listaProdutosVazia.remove(i);
+                           
+                            System.out.println("listaTemp");
+                        }
+                        else {
+                            System.out.println("ELSEZADA");
+                        }
+                        
+                        
+                    }
+                    
+                    for (int i=0;i<listaProdutosVendidosTemp.size();i++) {
+                        String item = listaProdutosVendidosTemp.get(i);
+                        listaProdutosVendidosVazia.removeElement(item);
+                    }
+                    jList2.setModel(listaProdutosVendidosVazia);
+                    
+                }
+                
+            }
+            else {
+                for (int i=0;i<Janela.produtosVendidos.size();i++) {
+                    if (String.valueOf(Janela.produtosVendidos.get(i).getNome().toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                        listaProdutosVendidosVazia.addElement(Janela.produtosVendidos.get(i).getNome());
+                        iniciou = true;
+                        jList2.setModel(listaProdutosVendidosVazia);
+                        System.out.println("listaPadrao");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+        jTextField2.setForeground(new Color(153, 153, 153));
+        
+        jTextField2.setText("Barra de busca");
+    }//GEN-LAST:event_jTextField2FocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

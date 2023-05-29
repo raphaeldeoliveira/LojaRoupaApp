@@ -4,6 +4,4 @@ faturamento e lucro só devem ser incrementados caso a peça seja
 vendida. Dentro do painel detalhamento terá o lucro e faturamento
 previstos, que é o que atualmente esta mostrando no painel2
 
-duvida albiero
-
-1- porque a busca nao atualiza quando escreve 'cas' e depois 'ca'. Inves de adicionar 2 ele adiciona somente 1
+quando da um 'vendido' com o filtro de busca pela barra de busca, ele nao pega o indice certo. Tem que mudar essa logica
