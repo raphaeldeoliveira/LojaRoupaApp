@@ -217,12 +217,11 @@ public class Painel1 extends javax.swing.JPanel {
                 }
                 else {
                     if (validarDados(user, senha) == false) {
-                        JOptionPane.showMessageDialog(null, "Usuário inválido!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Usuário inválido!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
                     }
                     else {
 
                         // Transição
-
                         Janela.t1 = new Transicao();
                         JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                         janela.getContentPane().remove(Janela.p1);

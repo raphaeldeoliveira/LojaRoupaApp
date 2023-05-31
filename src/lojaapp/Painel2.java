@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
@@ -168,11 +169,15 @@ public class Painel2 extends javax.swing.JPanel {
         paneNovaLevaProdutos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int resposta = JOptionPane.showOptionDialog(null,"Deseja continuar?","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
+                int resposta = JOptionPane.showOptionDialog(null,"Deseja continuar?\nTodos os dados serão apagados","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
         
                 if (resposta == JOptionPane.YES_OPTION) {
-                   
-                    Janela.criarRelatorioDaLeva();
+                    // remove todos os dados que são serializados
+                    
+                    // pega o arquivo serializado
+                    File arquivo = new File("dados.ser");
+                    arquivo.delete();
+                    System.exit(0);
                     
                 } else {
                     
@@ -241,10 +246,20 @@ public class Painel2 extends javax.swing.JPanel {
     }
     
     public void atualizarRelogio(int hora, int minuto, int segundo) {
-        
-        String time = String.valueOf(hora).concat(":");
+        String time = "";
+        if (hora < 10) {
+            time = time.concat("0");
+        }
+        time = time.concat(String.valueOf(hora));
+        time = time.concat(":");
+        if (minuto < 10) {
+            time = time.concat("0");
+        }
         time = time.concat(String.valueOf(minuto));
         time = time.concat(":");
+        if (segundo < 10) {
+            time = time.concat("0");
+        }
         time = time.concat(String.valueOf(segundo));
         
         jLabel8.setText(time);

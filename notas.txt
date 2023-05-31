@@ -4,4 +4,12 @@ faturamento e lucro só devem ser incrementados caso a peça seja
 vendida. Dentro do painel detalhamento terá o lucro e faturamento
 previstos, que é o que atualmente esta mostrando no painel2
 
-quando da um 'vendido' com o filtro de busca pela barra de busca, ele nao pega o indice certo. Tem que mudar essa logica
+quando da um 'vendido' com o filtro de busca pela barra de busca, ele nao pega o indice certo. Tem que mudar essa logica OKOKOK
+
+quando ele der vendido, extraviado ou devolvido os parametros de preço, investimento, custo, faturamento, lucro, etc. Devem ser alterados. Dessa parte nao esta nada implementado
+
+ele da erro quando nao tem o arquivo serializado com dados. Resolver
+
+nao deixar adicionar produtos sem categoria e genero
+
+adicionar todos os componentes (botoes) via codigo, se nao ele vai deixar ficar mudando de tamanho quando a tela aumenta ou diminui
