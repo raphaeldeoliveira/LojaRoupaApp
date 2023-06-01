@@ -7,12 +7,16 @@ public class Dados implements Serializable {
     
     private ArrayList<Produto> produtosListados = new ArrayList<>();
     private ArrayList<Produto> produtosVendidos = new ArrayList<>();
-    private ArrayList<Usuario> usuarios = new ArrayList<>();
-    private ArrayList<Integer> temposDeSessao = new ArrayList<>();
     
     private float investimento;
-    private float faturamento;
-    private float lucro;
+    private float faturamentoReal;
+    private float lucroReal;
+    private float faturamentoEsperado;
+    private float lucroEsperado;
+    
+    private int quantidadeExtraviados;
+    private float somatorioPVExtraviados;
+    private float somatorioPCExtraviados;
 
     public Dados() {
     }
@@ -32,23 +36,7 @@ public class Dados implements Serializable {
     public void setProdutosVendidos(ArrayList<Produto> produtosVendidos) {
         this.produtosVendidos = produtosVendidos;
     }
-
-    public ArrayList<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(ArrayList<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public ArrayList<Integer> getTemposDeSessao() {
-        return temposDeSessao;
-    }
-
-    public void setTemposDeSessao(ArrayList<Integer> temposDeSessao) {
-        this.temposDeSessao = temposDeSessao;
-    }
-
+    
     public float getInvestimento() {
         return investimento;
     }
@@ -57,20 +45,60 @@ public class Dados implements Serializable {
         this.investimento = investimento;
     }
 
-    public float getFaturamento() {
-        return faturamento;
+    public float getFaturamentoReal() {
+        return faturamentoReal;
     }
 
-    public void setFaturamento(float faturamento) {
-        this.faturamento = faturamento;
+    public void setFaturamentoReal(float faturamentoReal) {
+        this.faturamentoReal = faturamentoReal;
     }
 
-    public float getLucro() {
-        return lucro;
+    public float getLucroReal() {
+        return lucroReal;
     }
 
-    public void setLucro(float lucro) {
-        this.lucro = lucro;
+    public void setLucroReal(float lucroReal) {
+        this.lucroReal = lucroReal;
+    }
+
+    public float getFaturamentoEsperado() {
+        return faturamentoEsperado;
+    }
+
+    public void setFaturamentoEsperado(float faturamentoEsperado) {
+        this.faturamentoEsperado = faturamentoEsperado;
+    }
+
+    public float getLucroEsperado() {
+        return lucroEsperado;
+    }
+
+    public void setLucroEsperado(float lucroEsperado) {
+        this.lucroEsperado = lucroEsperado;
+    }
+
+    public int getQuantidadeExtraviados() {
+        return quantidadeExtraviados;
+    }
+
+    public void setQuantidadeExtraviados(int quantidadeExtraviados) {
+        this.quantidadeExtraviados = quantidadeExtraviados;
+    }
+
+    public float getSomatorioPVExtraviados() {
+        return somatorioPVExtraviados;
+    }
+
+    public void setSomatorioPVExtraviados(float somatorioPVExtraviados) {
+        this.somatorioPVExtraviados = somatorioPVExtraviados;
+    }
+
+    public float getSomatorioPCExtraviados() {
+        return somatorioPCExtraviados;
+    }
+
+    public void setSomatorioPCExtraviados(float somatorioPCExtraviados) {
+        this.somatorioPCExtraviados = somatorioPCExtraviados;
     }
     
 }

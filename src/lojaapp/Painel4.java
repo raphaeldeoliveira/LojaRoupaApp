@@ -164,8 +164,16 @@ public class Painel4 extends javax.swing.JPanel {
                     // atualiza o Jlist do painel3
                     Janela.p3.adicionarElementoLista(p1);
                     // atualiza os valores do painel de controle (p2)
-                    Janela.p2.novoProdutoAdicionado(precoCompra, precoVenda);
+                    Janela.p2.novoProdutoAdicionado();
+                    // atualiza os valores monetarios da janela
+                    Janela.investimento = Janela.investimento + precoCompra;
+                    Janela.faturamentoEsperado = Janela.faturamentoEsperado + precoVenda;
+                    Janela.lucroEsperado = Janela.lucroEsperado + (precoVenda - precoCompra);
                 }
+                
+                // atualiza o painel detalhamento e de controle
+                Janela.p6.produtoAdicionado();
+                Janela.p2.novoProdutoAdicionado();
 
                 // chama o metodo que faz a serialização
                 Janela.serializar();
@@ -180,6 +188,8 @@ public class Painel4 extends javax.swing.JPanel {
                 jSpinner1.setValue(1);
                 buttonGroup2.clearSelection();
                 buttonGroup3.clearSelection();
+                
+                
                 
             }
         });

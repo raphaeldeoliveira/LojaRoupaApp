@@ -24,7 +24,7 @@ public class Janela extends javax.swing.JFrame {
     static Painel3 p3 = new Painel3();
     static Painel4 p4;
     static Painel5 p5;
-    static Painel6 p6;
+    static Painel6 p6 = new Painel6();
     static Painel7 p7 = new Painel7();
     
     public static ArrayList<Produto> produtosListados = new ArrayList<>();
@@ -35,6 +35,12 @@ public class Janela extends javax.swing.JFrame {
     static LocalTime horaInicio;
     
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
+    
+    public static float investimento;
+    public static float faturamentoReal;
+    public static float lucroReal;
+    public static float faturamentoEsperado;
+    public static float lucroEsperado;
     
     public Janela() {
         initComponents();
@@ -56,11 +62,16 @@ public class Janela extends javax.swing.JFrame {
         // pega os dados e bota no objeto
         dado.setProdutosListados(Janela.produtosListados);
         dado.setProdutosVendidos(Janela.produtosVendidos);
-        dado.setUsuarios(Janela.usuarios);
         
-        dado.setInvestimento(Janela.p2.investimento);
-        dado.setFaturamento(Janela.p2.faturamento);
-        dado.setLucro(Janela.p2.lucro);
+        dado.setInvestimento(investimento);
+        dado.setFaturamentoReal(faturamentoReal);
+        dado.setLucroReal(lucroReal);
+        dado.setFaturamentoEsperado(faturamentoEsperado);
+        dado.setLucroEsperado(lucroEsperado);
+        
+        dado.setQuantidadeExtraviados(Janela.p6.quantidadeExtraviados);
+        dado.setSomatorioPCExtraviados(Janela.p6.somatorioPCExtraviados);
+        dado.setSomatorioPVExtraviados(Janela.p6.somatorioPVExtraviados);
         // ! faltou o tempo de seção !
         
         try {
@@ -99,13 +110,18 @@ public class Janela extends javax.swing.JFrame {
                 // atribui aos arrayList o que esta no arquivo serializado
                 produtosListados = dadosSerializados.getProdutosListados();
                 produtosVendidos = dadosSerializados.getProdutosVendidos();
-                usuarios = dadosSerializados.getUsuarios();
 
                 // atribui as vaiaveis o que estava no arquivo serializado
-                Janela.p2.investimento = dadosSerializados.getInvestimento();;
-                Janela.p2.faturamento= dadosSerializados.getFaturamento();;
-                Janela.p2.lucro = dadosSerializados.getLucro();;
+                investimento = dadosSerializados.getInvestimento();;
+                faturamentoReal = dadosSerializados.getFaturamentoReal();;
+                lucroReal = dadosSerializados.getLucroReal();;
+                faturamentoEsperado = dadosSerializados.getFaturamentoEsperado();
+                lucroEsperado = dadosSerializados.getLucroEsperado();
                 Janela.p7.carregarUsuariosSerializados(usuarios);
+                
+                Janela.p6.quantidadeExtraviados = dadosSerializados.getQuantidadeExtraviados();
+                Janela.p6.somatorioPCExtraviados = dadosSerializados.getSomatorioPCExtraviados();
+                Janela.p6.somatorioPVExtraviados = dadosSerializados.getSomatorioPVExtraviados();
 
                 // metodo para atualizar as listas e carregar os itens serialziados
                 atualizarListas();
@@ -121,8 +137,66 @@ public class Janela extends javax.swing.JFrame {
         
     }
     
+    public void serializarUsuarios() {
+        
+        // instancia a classe de serialização
+        Usuarios usuarios = new Usuarios();
+        // cria o nome do arquivo de serialização
+        String nomeDoArquivo = "usuarios.ser";
+        
+        // pega os dados e bota no objeto
+        usuarios.setUsuarios(Janela.usuarios);
+        
+        try {
+            FileOutputStream arquivo = new FileOutputStream(nomeDoArquivo);
+            ObjectOutputStream out = new ObjectOutputStream(arquivo);
+            out.writeObject(usuarios);
+            out.close();
+            arquivo.close();
+            
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void desserialziarUsuarios() {
+        
+        String caminhoArquivo = "usuarios.ser";
+        File arquivoTeste = new File(caminhoArquivo);
+        
+        if (arquivoTeste.exists() == true) {
+            
+            Usuarios usuariosSerializados = null;
+            String nomeDoArquivo = "usuarios.ser";
+
+            try {
+                FileInputStream arquivo = new FileInputStream(nomeDoArquivo);
+                ObjectInputStream in = new ObjectInputStream(arquivo);
+
+                usuariosSerializados = (Usuarios)in.readObject();
+                in.close();
+                arquivo.close();
+
+                // atribui aos arrayList o que esta no arquivo serializado
+                usuarios = usuariosSerializados.getUsuarios();
+
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
+            }
+            
+        }
+        
+    }
+    
     public void atualizarListas() {
         p3.adicionarItensSerializados();
+        p6.adicionarItensSerializados();
     }
     
     public void pegarTempoInicioSessao() {

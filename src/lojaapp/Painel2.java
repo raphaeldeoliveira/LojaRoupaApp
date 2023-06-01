@@ -16,10 +16,6 @@ import javax.swing.SwingUtilities;
 
 public class Painel2 extends javax.swing.JPanel {
 
-    static float investimento;
-    static float faturamento;
-    static float lucro;
-    
     // labels e paineis globais
     JLabel botaoNovaLevaProdutos = new JLabel("Nova leva");
     JPanel paneNovaLevaProdutos = new JPanel();
@@ -32,13 +28,17 @@ public class Painel2 extends javax.swing.JPanel {
     
     public Painel2() {
         initComponents();
-        jLabel4.setText(String.valueOf(String.valueOf(investimento).substring(0, (String.valueOf(investimento).indexOf(".")) + 3)));
-        jLabel5.setText(String.valueOf(String.valueOf(faturamento).substring(0, (String.valueOf(faturamento).indexOf(".")) + 3)));
-        jLabel6.setText(String.valueOf(String.valueOf(lucro).substring(0, (String.valueOf(lucro).indexOf(".")) + 3)));
+        dadosFinanceirosIniciais();
         definirData();
         botarLabels();
         config();
         iniciarRelogio();
+    }
+    
+    public void dadosFinanceirosIniciais() {
+        jLabel4.setText(String.valueOf(String.valueOf(Janela.investimento)));
+        jLabel5.setText(String.valueOf(String.valueOf(Janela.faturamentoEsperado)));
+        jLabel6.setText(String.valueOf(String.valueOf(Janela.lucroEsperado)));
     }
     
     public void botarLabels() {
@@ -218,7 +218,6 @@ public class Painel2 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // passa para o painel de detalhamento
-                Janela.p6 = new Painel6(investimento, faturamento, lucro, investimento, faturamento, lucro);
                 JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                 janela.getContentPane().remove(Janela.p2);
                 janela.add(Janela.p6, BorderLayout.CENTER);
@@ -266,14 +265,13 @@ public class Painel2 extends javax.swing.JPanel {
         
     }
     
-    public void novoProdutoAdicionado(float precoCompra, float precoVenda) {
-        investimento = investimento + precoCompra;
-        faturamento = faturamento + precoVenda;
-        lucro = faturamento - investimento;
-        
-        jLabel4.setText(String.valueOf(String.valueOf(investimento).substring(0, (String.valueOf(investimento).indexOf(".")) + 3)));
-        jLabel5.setText(String.valueOf(String.valueOf(faturamento).substring(0, (String.valueOf(faturamento).indexOf(".")) + 3)));
-        jLabel6.setText(String.valueOf(String.valueOf(lucro).substring(0, (String.valueOf(lucro).indexOf(".")) + 3)));
+    public void novoProdutoAdicionado() {
+        jLabel4.setText(String.valueOf(String.valueOf(Janela.investimento)));
+    }
+    
+    public void produtoVendido(float precoCompra, float precoVenda) {
+        jLabel5.setText(String.valueOf(Janela.faturamentoReal));
+        jLabel6.setText(String.valueOf(Janela.lucroReal));
     }
 
     @SuppressWarnings("unchecked")

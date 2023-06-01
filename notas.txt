@@ -13,3 +13,5 @@ ele da erro quando nao tem o arquivo serializado com dados. Resolver
 nao deixar adicionar produtos sem categoria e genero
 
 adicionar todos os componentes (botoes) via codigo, se nao ele vai deixar ficar mudando de tamanho quando a tela aumenta ou diminui
+
+*quando der o 'nova leva' os usuarios nao devem ser excluidos => serializar dois arquivos. Um que sera excluido e outro que nao

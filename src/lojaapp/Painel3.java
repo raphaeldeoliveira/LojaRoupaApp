@@ -274,6 +274,9 @@ public class Painel3 extends javax.swing.JPanel {
                         }
                         jList2.setModel(listaProdutosVendidos);
 
+                        // atualiza o painel detalhamento
+                        Janela.p6.produtoExtraviado(Janela.produtosListados.get(index).getPrecoCompra(), Janela.produtosListados.get(index).getPrecoVenda());
+                        
                         // atualiza os arrayLists (deixa no mesmo estado que o defaultListModel)
                         Janela.produtosListados.remove(index);
                         
@@ -349,6 +352,8 @@ public class Painel3 extends javax.swing.JPanel {
                         
                     }
                 }
+                
+                iniciou = false;
                 
                 
                 // codigo velho
@@ -432,6 +437,14 @@ public class Painel3 extends javax.swing.JPanel {
                         
                         // deixa selecionado o primeiro produto da lista
                         jList1.setSelectedIndex(0);
+                        
+                        // atualiza os valores monetarios da janela
+                        Janela.faturamentoReal = Janela.faturamentoReal + p1.getPrecoVenda();
+                        Janela.lucroReal = Janela.lucroReal + (p1.getPrecoVenda() - p1.getPrecoCompra());
+                        
+                        // atualiza o painel de detalhamento (6) e de controle (2)
+                        Janela.p6.produtoVendido(p1.getPrecoCompra(), p1.getPrecoVenda());
+                        Janela.p2.produtoVendido(p1.getPrecoCompra(), p1.getPrecoVenda());
 
                         // faz a serialização
                         Janela.serializar();
@@ -491,82 +504,149 @@ public class Painel3 extends javax.swing.JPanel {
                 String genero = "";
                 String categoria = "";
                 
-                if ((!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) && (!jRadioButton3.isSelected() && !jRadioButton4.isSelected() && !jRadioButton5.isSelected() && !jRadioButton6.isSelected() && !jRadioButton7.isSelected() && !jRadioButton8.isSelected() && !jRadioButton9.isSelected())) {
-                    JOptionPane.showMessageDialog(null, "Algum filtro deve ser selecionado!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
+                // deixa a lista temporaria de filtragem vazia
+                listaProdutosListadosVazia.removeAllElements();
+                listaProdutosVendidosVazia.removeAllElements();
+                
+                // coloca a lista padrao inicialmente
+                jList1.setModel(listaProdutosListados);
+                jList2.setModel(listaProdutosVendidos);
+                    
+                // pega os dados do filtro
+                // GENERO
+                if (jRadioButton1.isSelected()) {
+                    genero = "masculino";
+                    buttonTemp = jRadioButton1;
                 }
                 else {
-                    
-                    if (filtrado && (((buttonTemp != null && buttonTemp.isSelected()) && (buttonTemp2 != null && buttonTemp2.isSelected())) || (buttonTemp != null && buttonTemp.isSelected()) || (buttonTemp2 != null && buttonTemp2.isSelected()))) {
-                        System.out.println("excessão");
-                        return;
+                    if (jRadioButton2.isSelected()) {
+                        genero = "feminino";
+                        buttonTemp = jRadioButton2;
+                    }
+                }
+
+                // CATEGORIA
+                if (jRadioButton3.isSelected()) {
+                    categoria = "calça";
+                    buttonTemp2 = jRadioButton3;
+                }
+                else {
+                    if (jRadioButton4.isSelected()) {
+                        categoria = "camiseta";
+                        buttonTemp2 = jRadioButton4;
                     }
                     else {
-                        System.out.println("foi");
-                    }
-                    // pega os dados do filtro
-                    // GENERO
-                    if (jRadioButton1.isSelected()) {
-                        genero = "masculino";
-                        buttonTemp = jRadioButton1;
-                    }
-                    else {
-                        if (jRadioButton2.isSelected()) {
-                            genero = "feminino";
-                            buttonTemp = jRadioButton2;
-                        }
-                    }
-                    
-                    // CATEGORIA
-                    if (jRadioButton3.isSelected()) {
-                        categoria = "calça";
-                        buttonTemp2 = jRadioButton3;
-                    }
-                    else {
-                        if (jRadioButton4.isSelected()) {
-                            categoria = "camiseta";
-                            buttonTemp2 = jRadioButton4;
+                        if (jRadioButton5.isSelected()) {
+                            categoria = "tenis";
+                            buttonTemp2 = jRadioButton5;
                         }
                         else {
-                            if (jRadioButton5.isSelected()) {
-                                categoria = "tenis";
-                                buttonTemp2 = jRadioButton5;
+                            if (jRadioButton6.isSelected()) {
+                                categoria = "casaco";
+                                buttonTemp2 = jRadioButton6;
                             }
                             else {
-                                if (jRadioButton6.isSelected()) {
-                                    categoria = "casaco";
-                                    buttonTemp2 = jRadioButton6;
+                                if (jRadioButton7.isSelected()) {
+                                    categoria = "acessorios";
+                                    buttonTemp2 = jRadioButton7;
                                 }
                                 else {
-                                    if (jRadioButton7.isSelected()) {
-                                        categoria = "acessorios";
-                                        buttonTemp2 = jRadioButton7;
+                                    if (jRadioButton8.isSelected()) {
+                                        categoria = "meia";
+                                        buttonTemp2 = jRadioButton8;
                                     }
                                     else {
-                                        if (jRadioButton8.isSelected()) {
-                                            categoria = "meia";
-                                            buttonTemp2 = jRadioButton8;
-                                        }
-                                        else {
-                                            if (jRadioButton9.isSelected()) {
-                                                categoria = "roupaIntima";
-                                                buttonTemp2 = jRadioButton9;
-                                            }
+                                        if (jRadioButton9.isSelected()) {
+                                            categoria = "roupaIntima";
+                                            buttonTemp2 = jRadioButton9;
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                    for (int i=0;i<Janela.produtosListados.size();i++) {
-                        if (Janela.produtosListados.get(i).getGenero().equals(genero) || Janela.produtosListados.get(i).getCategoria().equals(categoria)) {
-                            listaProdutosListadosVazia.addElement(Janela.produtosListados.get(i).getNome());
+                }
+
+                // ATUALIZACAONOVA
+
+                if (genero.equals("") && categoria.equals("")) {
+                    // se os filtros forem vazios mostra tudo
+                    jList1.setModel(listaProdutosListados);
+                    jList2.setModel(listaProdutosVendidos);
+                    iniciou = false;
+                }
+                else {
+                    if (!genero.equals("") && !categoria.equals("")) {
+                        // faz a pesquisa com dois filtros
+                        
+                        for (int i=0;i<listaProdutosListados.size();i++) {
+                            // vai ter que mexer no arrayList, pra pegar os atributos
+                            // se os filtros aplicarem certo (pelo array) ele joga na lista vazia (temporaria)
+                            if (Janela.produtosListados.get(i).getCategoria().equals(categoria) && Janela.produtosListados.get(i).getGenero().equals(genero)) {
+                                listaProdutosListadosVazia.addElement(listaProdutosListados.get(i));
+                            }
+                        }
+                        
+                        for (int i=0;i<listaProdutosVendidos.size();i++) {
+                            if (Janela.produtosVendidos.get(i).getCategoria().equals(categoria) && Janela.produtosVendidos.get(i).getGenero().equals(genero)) {
+                                listaProdutosVendidosVazia.addElement(listaProdutosVendidos.get(i));
+                            }
+                        }
+                        
+                    }
+                    else {
+                        if (genero.equals("")) {
+                            // faz busca só pela categoria
+                            
+                            for (int i=0;i<listaProdutosListados.size();i++) {
+                                
+                                if (Janela.produtosListados.get(i).getCategoria().equals(categoria)) {
+                                    listaProdutosListadosVazia.addElement(listaProdutosListados.get(i));
+                                }
+                                
+                            }
+                            
+                            for (int i=0;i<listaProdutosVendidos.size();i++) {
+                                if (Janela.produtosVendidos.get(i).getCategoria().equals(categoria)) {
+                                    listaProdutosVendidosVazia.addElement(listaProdutosVendidos.get(i));
+                                }
+                            }
+                        }
+                        else {
+                            if (categoria.equals("")) {
+                                // faz a busca só pelo genero
+                                
+                                for (int i=0;i<listaProdutosListados.size();i++) {
+                                    
+                                    if (Janela.produtosListados.get(i).getGenero().equals(genero)) {
+                                        listaProdutosListadosVazia.addElement(listaProdutosListados.get(i));
+                                    }
+                                    
+                                }
+                                for (int i=0;i<listaProdutosVendidos.size();i++) {
+                                    if (Janela.produtosVendidos.get(i).getGenero().equals(genero)) {
+                                        listaProdutosVendidosVazia.addElement(listaProdutosVendidos.get(i));
+                                    }
+                                }
+                            }
                         }
                     }
+                    iniciou = true;
+                    // atualiza o jlist
                     jList1.setModel(listaProdutosListadosVazia);
-                    
-                    filtrado = true;
-                    
+                    jList2.setModel(listaProdutosVendidosVazia);
                 }
+
+
+                // CODIGO VELHO
+                /*for (int i=0;i<Janela.produtosListados.size();i++) {
+                    if (Janela.produtosListados.get(i).getGenero().equals(genero) || Janela.produtosListados.get(i).getCategoria().equals(categoria)) {
+                        listaProdutosListadosVazia.addElement(Janela.produtosListados.get(i).getNome());
+                    }
+                }
+                jList1.setModel(listaProdutosListadosVazia);
+
+                filtrado = true;*/
                 
                 
                 
@@ -1055,7 +1135,7 @@ public class Painel3 extends javax.swing.JPanel {
                     System.out.println("tamanho do listaProdutosTemp: "+listaProdutosListadosTemp.size());
                     for (int i=0;i<listaProdutosListadosTemp.size();i++) {
                         
-                        if (String.valueOf(listaProdutosListadosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                        if (String.valueOf(listaProdutosListadosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                             listaProdutosListadosVazia.addElement(listaProdutosListadosTemp.get(i));
                             listaProdutosListadosTemp.remove(i);
                             jList1.setModel(listaProdutosListadosVazia);
@@ -1068,7 +1148,7 @@ public class Painel3 extends javax.swing.JPanel {
                     int tamanhoLista = listaProdutosListadosVazia.size();
                     for (int i = tamanhoLista - 1; i >= 0; i--) {
                         System.out.println("comparando: "+listaProdutosListadosVazia.get(i).charAt(busca.length()-1)+" -- "+busca.charAt(busca.length()-1));
-                        if (!String.valueOf(listaProdutosListadosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                        if (!String.valueOf(listaProdutosListadosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                             
                             listaProdutosListadosTemp.addElement(listaProdutosListadosVazia.get(i));
                             System.out.println("deletado: "+listaProdutosListadosVazia.remove(i));
@@ -1094,7 +1174,7 @@ public class Painel3 extends javax.swing.JPanel {
             }
             else {
                 for (int i=0;i<listaProdutosListados.size();i++) {
-                    if (String.valueOf(listaProdutosListados.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                    if (String.valueOf(listaProdutosListados.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                         listaProdutosListadosVazia.addElement(listaProdutosListados.get(i));
                         iniciou = true;
                         jList1.setModel(listaProdutosListadosVazia);
@@ -1119,13 +1199,12 @@ public class Painel3 extends javax.swing.JPanel {
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
         // LISTA DE VENDIDOS
-        
         String selecionado = jList2.getSelectedValue();
         
         // acha onde esta o item selecionado
         for (int i=0;i<Janela.produtosVendidos.size();i++) {
             if (selecionado.equals(Janela.produtosVendidos.get(i).getNome())) {
-                jLabel13.setText("Feminino");
+                jLabel13.setText(Janela.produtosVendidos.get(i).getGenero());
                 jLabel8.setText(Janela.produtosVendidos.get(i).getCategoria());
                 jLabel9.setText(String.valueOf(Janela.produtosVendidos.get(i).getPrecoCompra()));
                 jLabel10.setText(String.valueOf(Janela.produtosVendidos.get(i).getPrecoVenda()));
@@ -1166,7 +1245,7 @@ public class Painel3 extends javax.swing.JPanel {
                     System.out.println("tamanho do listaProdutosTemp: "+listaProdutosListadosTemp.size());
                     for (int i=0;i<listaProdutosVendidosTemp.size();i++) {
                         
-                        if (String.valueOf(listaProdutosVendidosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                        if (String.valueOf(listaProdutosVendidosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                             listaProdutosVendidosVazia.addElement(listaProdutosVendidosTemp.get(i));
                             listaProdutosVendidosTemp.remove(i);
                             jList2.setModel(listaProdutosVendidosVazia);
@@ -1179,7 +1258,7 @@ public class Painel3 extends javax.swing.JPanel {
                     int tamanhoLista = listaProdutosVendidosVazia.size();
                     for (int i = tamanhoLista - 1; i >= 0; i--) {
                         System.out.println("comparando: "+listaProdutosVendidosVazia.get(i).charAt(busca.length()-1)+" -- "+busca.charAt(busca.length()-1));
-                        if (!String.valueOf(listaProdutosVendidosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                        if (!String.valueOf(listaProdutosVendidosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                             
                             listaProdutosVendidosTemp.addElement(listaProdutosVendidosVazia.get(i));
                             System.out.println("deletado: "+listaProdutosVendidosVazia.remove(i));
@@ -1205,7 +1284,7 @@ public class Painel3 extends javax.swing.JPanel {
             }
             else {
                 for (int i=0;i<listaProdutosVendidos.size();i++) {
-                    if (String.valueOf(listaProdutosVendidos.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)))) {
+                    if (String.valueOf(listaProdutosVendidos.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                         listaProdutosVendidosVazia.addElement(listaProdutosVendidos.get(i));
                         iniciou2 = true;
                         jList2.setModel(listaProdutosVendidosVazia);
