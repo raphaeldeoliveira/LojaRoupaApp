@@ -344,11 +344,21 @@ public class Painel3 extends javax.swing.JPanel {
                         Janela.produtosListados.add(p1);
                         Janela.produtosVendidos.remove(p1);
                         
+                        // altera os valores de lucro e faturamento real e esperado
+                        Janela.lucroReal = Janela.lucroReal - (p1.getPrecoVenda() - p1.getPrecoCompra());
+                        Janela.faturamentoReal = Janela.faturamentoReal - p1.getPrecoVenda();
+                        
                         // deixa selecionado o primeiro produto da lista
                         jList2.setSelectedIndex(0);
 
                         // faz a serialização
                         Janela.serializar();
+                        
+                        // atualiza o painel de controle (p2)
+                        Janela.p2.atualizarLucroFaturamentoReal();
+                        
+                        // atualiza o painel detalhamento (p6)
+                        Janela.p6.atualizarLucroFaturamentoReal();
                         
                     }
                 }
@@ -653,6 +663,11 @@ public class Painel3 extends javax.swing.JPanel {
             }
         });
                 
+    }
+    
+    public void limparSelecaoListas() {
+        jList1.clearSelection();
+        jList2.clearSelection();
     }
 
     @SuppressWarnings("unchecked")

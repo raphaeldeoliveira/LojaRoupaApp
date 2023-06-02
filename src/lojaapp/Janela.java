@@ -51,6 +51,7 @@ public class Janela extends javax.swing.JFrame {
         this.pack();
         pegarTempoInicioSessao();
         desserializar();
+        desserialziarUsuarios();
     }
     
     public static void serializar() {
@@ -117,7 +118,6 @@ public class Janela extends javax.swing.JFrame {
                 lucroReal = dadosSerializados.getLucroReal();;
                 faturamentoEsperado = dadosSerializados.getFaturamentoEsperado();
                 lucroEsperado = dadosSerializados.getLucroEsperado();
-                Janela.p7.carregarUsuariosSerializados(usuarios);
                 
                 Janela.p6.quantidadeExtraviados = dadosSerializados.getQuantidadeExtraviados();
                 Janela.p6.somatorioPCExtraviados = dadosSerializados.getSomatorioPCExtraviados();
@@ -137,7 +137,7 @@ public class Janela extends javax.swing.JFrame {
         
     }
     
-    public void serializarUsuarios() {
+    public static void serializarUsuarios() {
         
         // instancia a classe de serialização
         Usuarios usuarios = new Usuarios();
@@ -181,6 +181,8 @@ public class Janela extends javax.swing.JFrame {
 
                 // atribui aos arrayList o que esta no arquivo serializado
                 usuarios = usuariosSerializados.getUsuarios();
+                
+                Janela.p7.carregarUsuariosSerializados(usuarios);
 
             }
             catch (IOException e) {

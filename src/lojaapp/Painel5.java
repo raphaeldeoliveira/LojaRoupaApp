@@ -89,26 +89,35 @@ public class Painel5 extends javax.swing.JPanel {
                 String senha = jTextField2.getText();
 
                 // verifica se os campos foram preenchidos corertamente
+                if (usuario.trim().isEmpty() || email.trim().isEmpty() || senha.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser prenchidos!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    if (!email.contains("@")) {
+                        JOptionPane.showMessageDialog(null, "Email inválido!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
+                    // cria o objeto e armazena os valores
+                    Usuario u1 = new Usuario(usuario, senha, email);
 
-                // cria o objeto e armazena os valores
-                Usuario u1 = new Usuario(usuario, senha, email);
+                    // adiciona ao arrayList
+                    Janela.usuarios.add(u1);
 
-                // adiciona ao arrayList
-                Janela.usuarios.add(u1);
+                    // mensagem que deu certo
+                    JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
 
-                // mensagem que deu certo
-                JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!", "Agita", JOptionPane.INFORMATION_MESSAGE);
+                    // limpar campos
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
 
-                // limpar campos
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
+                    // faz a serialização
+                    Janela.serializarUsuarios();
 
-                // faz a serialização
-                Janela.serializar();
-
-                // atualiza o painel de usuarios cadastrados (p7)
-                Janela.p7.carregarUsuariosAdicionados(usuario);
+                    // atualiza o painel de usuarios cadastrados (p7)
+                    Janela.p7.carregarUsuariosAdicionados(usuario);
+                }
             }
         });
         
@@ -167,29 +176,30 @@ public class Painel5 extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7))
+                                .addComponent(jLabel7)
+                                .addGap(8, 8, 8))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField3))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(3, 3, 3)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                                    .addComponent(jTextField2)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,11 +208,11 @@ public class Painel5 extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
-                .addGap(33, 33, 33)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

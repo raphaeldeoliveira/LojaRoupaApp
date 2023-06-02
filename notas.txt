@@ -1,17 +1,6 @@
-os dados do painel2: investimento, faturamento e lucro devem ser
-reais. Ou seja, o investimento vai ser o total gasto e o
-faturamento e lucro só devem ser incrementados caso a peça seja
-vendida. Dentro do painel detalhamento terá o lucro e faturamento
-previstos, que é o que atualmente esta mostrando no painel2
+ta dando um errinho no admin, na gestao de usuarios
 
-quando da um 'vendido' com o filtro de busca pela barra de busca, ele nao pega o indice certo. Tem que mudar essa logica OKOKOK
+usar a parada que o ruan mostrou para definir a quantidade e o tipo de caracteres que o textfield aceita
 
-quando ele der vendido, extraviado ou devolvido os parametros de preço, investimento, custo, faturamento, lucro, etc. Devem ser alterados. Dessa parte nao esta nada implementado
-
-ele da erro quando nao tem o arquivo serializado com dados. Resolver
-
-nao deixar adicionar produtos sem categoria e genero
-
-adicionar todos os componentes (botoes) via codigo, se nao ele vai deixar ficar mudando de tamanho quando a tela aumenta ou diminui
-
-*quando der o 'nova leva' os usuarios nao devem ser excluidos => serializar dois arquivos. Um que sera excluido e outro que nao
+botar um icone no executavel para rodar no programa:
+propriedades -> clean and build -> generate javadoc

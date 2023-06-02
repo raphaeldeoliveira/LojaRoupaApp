@@ -68,7 +68,7 @@ public class Painel7 extends javax.swing.JPanel {
             jRadioButton2.setText(Janela.usuarios.get(index).getEmail());
             jRadioButton3.setText(Janela.usuarios.get(index).getSenha());
         } else {
-            // Lógica para tratar quando nenhum elemento está selecionado
+            
         }
     }
     
@@ -153,16 +153,24 @@ public class Painel7 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                int resposta = JOptionPane.showOptionDialog(null,"Tem certeza que deseja deletar usuario?","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
-                if (resposta == JOptionPane.YES_OPTION) {
-                    
-                    int index = jList2.getSelectedIndex();
-                    Janela.usuarios.remove(index);
-                    Janela.serializar();
-                    listaUsuarios.remove(index);
-                    jList2.setModel(listaUsuarios);
-                    System.out.println("fio");
-                    
+                if (jList2.getSelectedIndex() < 0) {
+                    JOptionPane.showMessageDialog(null, "Algum item da lista deve ser selecionado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int resposta = JOptionPane.showOptionDialog(null,"Tem certeza que deseja deletar usuario?","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
+                    if (resposta == JOptionPane.YES_OPTION) {
+
+                        int index = jList2.getSelectedIndex();
+                        Janela.usuarios.remove(index);
+                        Janela.serializarUsuarios();
+                        listaUsuarios.remove(index);
+                        jList2.setModel(listaUsuarios);
+                        System.out.println("fio");
+
+                    }
+
+                    // deixa apontado para o proximo elemento da lista
+                    jList2.setSelectedIndex(0);
                 }
             }
         });
@@ -200,7 +208,12 @@ public class Painel7 extends javax.swing.JPanel {
                                 // pega o input do dado alterado
                                 String novoEmail = JOptionPane.showInputDialog("Digite o novo email:");
                                 if (novoEmail != null) {
-                                    Janela.usuarios.get(index).setEmail(novoEmail);
+                                    if (!novoEmail.contains("@")) {
+                                        JOptionPane.showMessageDialog(null, "email inválido. Operação cancelada!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                    else {
+                                        Janela.usuarios.get(index).setEmail(novoEmail);
+                                    }
                                 } else {
 
                                 }
@@ -218,7 +231,7 @@ public class Painel7 extends javax.swing.JPanel {
                             }
                         }
 
-                        Janela.serializar();
+                        Janela.serializarUsuarios();
                         carregarUsuarioAlterado(index);
                         jList2.setSelectedIndex(lastIndex);
 

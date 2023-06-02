@@ -37,8 +37,13 @@ public class Painel2 extends javax.swing.JPanel {
     
     public void dadosFinanceirosIniciais() {
         jLabel4.setText(String.valueOf(String.valueOf(Janela.investimento)));
-        jLabel5.setText(String.valueOf(String.valueOf(Janela.faturamentoEsperado)));
-        jLabel6.setText(String.valueOf(String.valueOf(Janela.lucroEsperado)));
+        jLabel5.setText(String.valueOf(String.valueOf(Janela.faturamentoReal)));
+        jLabel6.setText(String.valueOf(String.valueOf(Janela.lucroReal)));
+    }
+    
+    public void atualizarLucroFaturamentoReal() {
+        jLabel5.setText(String.valueOf(Janela.faturamentoReal));
+        jLabel6.setText(String.valueOf(Janela.lucroReal));
     }
     
     public void botarLabels() {
@@ -49,19 +54,19 @@ public class Painel2 extends javax.swing.JPanel {
         jPanel1.add(modas);
         
         JLabel iconInvestimento = new JLabel("");
-        iconInvestimento.setBounds(38, -14, 180, 81);
+        iconInvestimento.setBounds(58, -14, 180, 81);
         iconInvestimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lojaapp/imagens/seta-cima.png")));
         iconInvestimento.setForeground(Color.WHITE);
         jPanel3.add(iconInvestimento);
         
         JLabel iconFaturamento = new JLabel("");
-        iconFaturamento.setBounds(38, 16, 180, 81);
+        iconFaturamento.setBounds(58, 16, 180, 81);
         iconFaturamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lojaapp/imagens/seta-baixo.png")));
         iconFaturamento.setForeground(Color.WHITE);
         jPanel3.add(iconFaturamento);
         
         JLabel iconLucro = new JLabel("$");
-        iconLucro.setBounds(46, 48, 180, 81);
+        iconLucro.setBounds(66, 48, 180, 81);
         iconLucro.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 18));
         iconLucro.setForeground(Color.WHITE);
         jPanel3.add(iconLucro);
@@ -207,6 +212,7 @@ public class Painel2 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // passa para o painel de vender items
+                Janela.p3.limparSelecaoListas();
                 JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                 janela.getContentPane().remove(Janela.p2);
                 janela.add(Janela.p3, BorderLayout.CENTER);

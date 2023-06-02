@@ -98,17 +98,14 @@ public class Painel4 extends javax.swing.JPanel {
         paneAdicionarItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String nomeProduto;
+                
+                String categoria = "";
+                String genero = "";
                 float precoCompra;
                 float precoVenda;
-                String categoria = "";
-                int quantidade;
-                String genero = "";
-
-                nomeProduto = jTextField1.getText();
-                precoCompra = Float.parseFloat(jTextField2.getText());
-                precoVenda = Float.parseFloat(jTextField3.getText());
-                quantidade = (int) jSpinner1.getValue();
+                
+                String nomeProduto = jTextField1.getText();
+                int quantidade = (int) jSpinner1.getValue();
 
                 // pega o genero do produto
                 if (jRadioButton3.isSelected()) {
@@ -154,40 +151,65 @@ public class Painel4 extends javax.swing.JPanel {
                         }
                     }
                 }
+                
+                // Verificar se todos os campos estão preenchidos
+                if (nomeProduto.trim().isEmpty() || categoria.trim().isEmpty() || genero.trim().isEmpty() || String.valueOf(jTextField2.getText()).trim().isEmpty() || String.valueOf(jTextField3.getText()).trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser prenchidos!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    try {
+                        precoCompra = Float.parseFloat(jTextField2.getText());
+                        precoVenda = Float.parseFloat(jTextField3.getText());
+                    } catch (NumberFormatException evt) {
+                        JOptionPane.showMessageDialog(null, "O valor inserido para o preço de compra ou venda não é um número válido", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
+                    if (precoCompra <= 0 || precoVenda <= 0) {
+                         JOptionPane.showMessageDialog(null, "O preço de compra e venda não podem ser menores que zero!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        // instancia um objeto produto
+                        Produto p1 = new Produto(nomeProduto, precoCompra, precoVenda, categoria, genero);
 
-                // instancia um objeto produto
-                Produto p1 = new Produto(nomeProduto, precoCompra, precoVenda, categoria, genero);
+                        for (int i=0;i<quantidade;i++) {
+                            // adiciona o produto ao array
+                            Janela.produtosListados.add(p1);
+                            // atualiza o Jlist do painel3
+                            Janela.p3.adicionarElementoLista(p1);
+                            // atualiza os valores do painel de controle (p2)
+                            Janela.p2.novoProdutoAdicionado();
+                            // atualiza os valores monetarios da janela
+                            Janela.investimento = Janela.investimento + precoCompra;
+                            Janela.faturamentoEsperado = Janela.faturamentoEsperado + precoVenda;
+                            Janela.lucroEsperado = Janela.lucroEsperado + (precoVenda - precoCompra);
+                        }
 
-                for (int i=0;i<quantidade;i++) {
-                    // adiciona o produto ao array
-                    Janela.produtosListados.add(p1);
-                    // atualiza o Jlist do painel3
-                    Janela.p3.adicionarElementoLista(p1);
-                    // atualiza os valores do painel de controle (p2)
-                    Janela.p2.novoProdutoAdicionado();
-                    // atualiza os valores monetarios da janela
-                    Janela.investimento = Janela.investimento + precoCompra;
-                    Janela.faturamentoEsperado = Janela.faturamentoEsperado + precoVenda;
-                    Janela.lucroEsperado = Janela.lucroEsperado + (precoVenda - precoCompra);
+                        // atualiza o painel detalhamento e de controle
+                        Janela.p6.produtoAdicionado();
+                        Janela.p2.novoProdutoAdicionado();
+
+                        // chama o metodo que faz a serialização
+                        Janela.serializar();
+
+                        // exibe mensagem de produto adicionado
+                        JOptionPane.showMessageDialog(null, "Item adicionado com sucesso!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
+
+                        // atualiza os percentuais do painel6
+                        Janela.p6.atualizarPercentuais();
+                        
+                        // limpa os textFields
+                        jTextField1.setText("");
+                        jTextField2.setText("");
+                        jTextField3.setText("");
+                        jSpinner1.setValue(1);
+                        buttonGroup2.clearSelection();
+                        buttonGroup3.clearSelection();
+                        
+                    }
                 }
                 
-                // atualiza o painel detalhamento e de controle
-                Janela.p6.produtoAdicionado();
-                Janela.p2.novoProdutoAdicionado();
-
-                // chama o metodo que faz a serialização
-                Janela.serializar();
                 
-                // exibe mensagem de produto adicionado
-                JOptionPane.showMessageDialog(null, "Item adicionado com sucesso!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
-                
-                // limpa os textFields
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jSpinner1.setValue(1);
-                buttonGroup2.clearSelection();
-                buttonGroup3.clearSelection();
                 
                 
                 
@@ -239,6 +261,7 @@ public class Painel4 extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -458,14 +481,26 @@ public class Painel4 extends javax.swing.JPanel {
                 .addGap(31, 31, 31))
         );
 
+        try {
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#######")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -473,6 +508,8 @@ public class Painel4 extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(130, 130, 130)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -493,6 +530,7 @@ public class Painel4 extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
