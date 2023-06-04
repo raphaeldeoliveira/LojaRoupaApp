@@ -58,6 +58,7 @@ public class Painel2 extends javax.swing.JPanel {
         iconInvestimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lojaapp/imagens/seta-cima.png")));
         iconInvestimento.setForeground(Color.WHITE);
         jPanel3.add(iconInvestimento);
+        System.out.println("aaa");
         
         JLabel iconFaturamento = new JLabel("");
         iconFaturamento.setBounds(58, 16, 180, 81);
