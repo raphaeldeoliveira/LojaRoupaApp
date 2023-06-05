@@ -5,9 +5,6 @@ import java.io.Serializable;
 public class Produto implements Serializable {
     
    private String nome;
-   // private data time - hora que foi adquirido
-   // private data time - dia que foi adquirido
-   private String codigo;
    private float precoCompra;
    private float precoVenda;
    private float lucro;
@@ -49,14 +46,6 @@ public class Produto implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public float getPrecoCompra() {

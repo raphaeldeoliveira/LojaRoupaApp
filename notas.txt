@@ -4,3 +4,5 @@ usar a parada que o ruan mostrou para definir a quantidade e o tipo de caractere
 
 botar um icone no executavel para rodar no programa:
 propriedades -> clean and build -> generate javadoc
+
+nao ta alterando os detalhes e lucro, faturamentoreal, etc quando altera o PV e PC

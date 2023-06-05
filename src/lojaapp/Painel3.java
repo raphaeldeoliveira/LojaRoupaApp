@@ -38,6 +38,10 @@ public class Painel3 extends javax.swing.JPanel {
     JLabel botaoFiltros = new JLabel("Filtros");
     JPanel paneFiltrar = new JPanel();
     JLabel botaoFiltrar = new JLabel("Filtrar");
+    JPanel paneAlterarPrecoCompra = new JPanel();
+    JLabel botaoAlterarPrecoCompra = new JLabel("Alterar PC");
+    JPanel paneAlterarPrecoVenda = new JPanel();
+    JLabel botaoAlterarPrecoVenda = new JLabel("Alterar PV");
     
     String busca;
     static boolean iniciou = false;
@@ -112,6 +116,21 @@ public class Painel3 extends javax.swing.JPanel {
         horizontal10.setBackground(Color.WHITE);
         jPanel1.add(horizontal10);
         
+        JPanel horizontal11 = new JPanel();
+        horizontal11.setBounds(301, 92, 119, 8);
+        horizontal11.setBackground(Color.WHITE);
+        jPanel1.add(horizontal11);
+        
+        JPanel horizontal12 = new JPanel();
+        horizontal12.setBounds(301, 126, 119, 11);
+        horizontal12.setBackground(Color.WHITE);
+        jPanel1.add(horizontal12);
+        
+        JPanel horizontal13 = new JPanel();
+        horizontal13.setBounds(301, 163, 119, 8);
+        horizontal13.setBackground(Color.WHITE);
+        jPanel1.add(horizontal13);
+        
         // botao filtros
         botaoFiltros.setBounds(337, 384, 100, 30);
         botaoFiltros.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
@@ -180,11 +199,32 @@ public class Painel3 extends javax.swing.JPanel {
         paneVendido.setBounds(302, 175, 117, 36);
         jPanel1.add(paneVendido);
         
+        // adiciona o botao de alterar Preço de compra
+        botaoAlterarPrecoCompra.setBounds(322, 136, 100, 30);
+        botaoAlterarPrecoCompra.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
+        botaoAlterarPrecoCompra.setForeground(Color.WHITE);
+        jPanel1.add(botaoAlterarPrecoCompra);
+        
+        paneAlterarPrecoCompra.setBounds(301, 132, 117, 36);
+        paneAlterarPrecoCompra.setBackground(new Color(217, 50, 138));
+        paneAlterarPrecoCompra.setBorder(new RoundBorder(Color.WHITE, 50, 11));
+        jPanel1.add(paneAlterarPrecoCompra);
+        
+        // adiciona o botao de alterar Preço de venda
+        botaoAlterarPrecoVenda.setBounds(322, 99, 100, 30);
+        botaoAlterarPrecoVenda.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
+        botaoAlterarPrecoVenda.setForeground(Color.WHITE);
+        jPanel1.add(botaoAlterarPrecoVenda);
+        
+        paneAlterarPrecoVenda.setBounds(301, 95, 117, 36);
+        paneAlterarPrecoVenda.setBackground(new Color(217, 50, 138));
+        paneAlterarPrecoVenda.setBorder(new RoundBorder(Color.WHITE, 50, 11));
+        jPanel1.add(paneAlterarPrecoVenda);
+        
         // adiciona painel central branco de interação (de botoes)
         paneInteracaoCentral.setBounds(300, 50, 120, 550);
         paneInteracaoCentral.setBackground(Color.WHITE);
         jPanel1.add(paneInteracaoCentral);
-        
     }
     
     public void adicionarElementoLista(Produto p1) {
@@ -662,6 +702,102 @@ public class Painel3 extends javax.swing.JPanel {
                 
             }
         });
+        
+        paneAlterarPrecoCompra.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+                int index = -1;
+                
+                if (jList2.getSelectedIndex() >= 0) {
+                    JOptionPane.showMessageDialog(null, "O produto deve estar listado para ter o preço alterado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    if (jList1.getSelectedIndex() < 0) {
+                        JOptionPane.showMessageDialog(null, "Algum produto listado deve ser selecionado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        index = jList1.getSelectedIndex();
+                
+                        // verifica se esta com a lista filtrada ou na padrao
+                        if (iniciou == true) {
+                            // encontra o index equivalente na lista padrao
+                            // pega do listaProdutosListadosVazia
+                            String produtoFiltrado = listaProdutosListadosVazia.get(index);
+                            // acha o indice no listaProdutosListados
+                            for (int i=0;i<listaProdutosListados.size();i++) {
+                                if (listaProdutosListados.get(i).equals(produtoFiltrado)) {
+                                    index = i;
+                                }
+                            }
+                        }
+                        
+                        // Cria uma nova instância do objeto Produto para a célula específica
+                        Produto p1 = null;
+                        p1 = new Produto(Janela.produtosListados.get(index).getNome(), Float.parseFloat(JOptionPane.showInputDialog("Digite o novo preço de compra:")), Janela.produtosListados.get(index).getPrecoVenda(), Janela.produtosListados.get(index).getCategoria(), Janela.produtosListados.get(index).getGenero());
+                        
+                        // Atualiza a célula específica com o novo objeto Produto
+                        Janela.produtosListados.set(index, p1);
+                    }
+                }
+                
+                // atualiza o card de informações a direita
+                jLabel13.setText(Janela.produtosListados.get(index).getGenero());
+                jLabel8.setText(Janela.produtosListados.get(index).getCategoria());
+                jLabel9.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoCompra()));
+                jLabel10.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoVenda()));
+                jLabel11.setText(String.valueOf(Janela.produtosListados.get(index).getLucro()));
+                
+            }
+        });
+        
+        paneAlterarPrecoVenda.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+                int index = -1;
+                
+                if (jList2.getSelectedIndex() >= 0) {
+                    JOptionPane.showMessageDialog(null, "O produto deve estar listado para ter o preço alterado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    if (jList1.getSelectedIndex() < 0) {
+                        JOptionPane.showMessageDialog(null, "Algum produto listado deve ser selecionado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        index = jList1.getSelectedIndex();
+                
+                        // verifica se esta com a lista filtrada ou na padrao
+                        if (iniciou == true) {
+                            // encontra o index equivalente na lista padrao
+                            // pega do listaProdutosListadosVazia
+                            String produtoFiltrado = listaProdutosListadosVazia.get(index);
+                            // acha o indice no listaProdutosListados
+                            for (int i=0;i<listaProdutosListados.size();i++) {
+                                if (listaProdutosListados.get(i).equals(produtoFiltrado)) {
+                                    index = i;
+                                }
+                            }
+                        }
+                        
+                        // Cria uma nova instância do objeto Produto para a célula específica
+                        Produto p1 = null;
+                        p1 = new Produto(Janela.produtosListados.get(index).getNome(), Janela.produtosListados.get(index).getPrecoCompra(), Float.parseFloat(JOptionPane.showInputDialog("Digite o novo preço de compra:")), Janela.produtosListados.get(index).getCategoria(), Janela.produtosListados.get(index).getGenero());
+                        
+                        // Atualiza a célula específica com o novo objeto Produto
+                        Janela.produtosListados.set(index, p1);
+                    }
+                }
+                
+                // atualiza o card de informações a direita
+                jLabel13.setText(Janela.produtosListados.get(index).getGenero());
+                jLabel8.setText(Janela.produtosListados.get(index).getCategoria());
+                jLabel9.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoCompra()));
+                jLabel10.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoVenda()));
+                jLabel11.setText(String.valueOf(Janela.produtosListados.get(index).getLucro()));
+                
+            }
+        });
                 
     }
     
@@ -700,7 +836,6 @@ public class Painel3 extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -913,13 +1048,6 @@ public class Painel3 extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(217, 50, 128));
         jLabel1.setText("Vender Items!");
 
-        jButton1.setText("Ver sincronizacao");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -927,17 +1055,13 @@ public class Painel3 extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(49, 49, 49))
+                .addContainerGap(512, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1))
+                .addComponent(jLabel1)
                 .addContainerGap())
         );
 
@@ -1100,20 +1224,27 @@ public class Painel3 extends javax.swing.JPanel {
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         
-        String selecionado = jList1.getSelectedValue();
-        
-        // acha onde esta o item selecionado
-        for (int i=0;i<Janela.produtosListados.size();i++) {
-            if (selecionado.equals(Janela.produtosListados.get(i).getNome())) {
-                jLabel13.setText("Feminino");
-                jLabel8.setText(Janela.produtosListados.get(i).getCategoria());
-                jLabel9.setText(String.valueOf(Janela.produtosListados.get(i).getPrecoCompra()));
-                jLabel10.setText(String.valueOf(Janela.produtosListados.get(i).getPrecoVenda()));
-                jLabel11.setText(String.valueOf(Janela.produtosListados.get(i).getLucro()));
-            }
-        }
-        
-        jList2.clearSelection();
+        int index = jList1.getSelectedIndex();
+
+        if (iniciou == true) {
+           // encontra o index equivalente na lista padrao
+           // pega do listaProdutosListadosVazia
+           String produtoFiltrado = listaProdutosListadosVazia.get(index);
+           // acha o indice no listaProdutosListados
+           for (int i=0;i<listaProdutosListados.size();i++) {
+               if (listaProdutosListados.get(i).equals(produtoFiltrado)) {
+                   index = i;
+               }
+           }
+       }
+
+       jLabel13.setText(Janela.produtosListados.get(index).getGenero());
+       jLabel8.setText(Janela.produtosListados.get(index).getCategoria());
+       jLabel9.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoCompra()));
+       jLabel10.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoVenda()));
+       jLabel11.setText(String.valueOf(Janela.produtosListados.get(index).getLucro()));
+
+       jList2.clearSelection();
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
@@ -1316,38 +1447,10 @@ public class Painel3 extends javax.swing.JPanel {
         jTextField2.setText("Barra de busca");
     }//GEN-LAST:event_jTextField2FocusLost
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        
-        System.out.println("\tArrayList produtosListados");
-        for (int i=0;i<Janela.produtosListados.size();i++) {
-            System.out.println(i+"o: "+Janela.produtosListados.get(i).getNome());
-        }
-        
-        System.out.println("");
-        System.out.println("\tDefaultListModel listaProdutosListados");
-        for (int i=0;i<listaProdutosListados.size();i++) {
-            System.out.println(i+"o: "+listaProdutosListados.get(i));
-        }
-        
-        System.out.println("");
-        System.out.println("\tArrayList produtosVendidos");
-        for (int i=0;i<Janela.produtosVendidos.size();i++) {
-            System.out.println(i+"o: "+Janela.produtosVendidos.get(i).getNome());
-        }
-        
-        System.out.println("");
-        System.out.println("\tDefaultListModel listaProdutosListados");
-        for (int i=0;i<listaProdutosVendidos.size();i++) {
-            System.out.println(i+"o: "+listaProdutosVendidos.get(i));
-        }
-        
-    }//GEN-LAST:event_jButton1MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
