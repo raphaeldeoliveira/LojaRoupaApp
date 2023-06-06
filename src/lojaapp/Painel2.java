@@ -58,7 +58,6 @@ public class Painel2 extends javax.swing.JPanel {
         iconInvestimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lojaapp/imagens/seta-cima.png")));
         iconInvestimento.setForeground(Color.WHITE);
         jPanel3.add(iconInvestimento);
-        System.out.println("aaa");
         
         JLabel iconFaturamento = new JLabel("");
         iconFaturamento.setBounds(58, 16, 180, 81);
@@ -72,12 +71,7 @@ public class Painel2 extends javax.swing.JPanel {
         iconLucro.setForeground(Color.WHITE);
         jPanel3.add(iconLucro);
         
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
         // Adição das coberturas
-        
         JPanel vertical1 = new JPanel();
         vertical1.setBounds(25, 121, 13, 249);
         vertical1.setBackground(new Color(217, 50, 128));
@@ -117,10 +111,6 @@ public class Painel2 extends javax.swing.JPanel {
         horizontal6.setBounds(38, 361, 200, 7);
         horizontal6.setBackground(new Color(217, 50, 128));
         jPanel3.add(horizontal6);
-        
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
         // Botão nova leva de produtos 
         botaoNovaLevaProdutos.setBounds(88, 222, 200, 40);
@@ -165,8 +155,6 @@ public class Painel2 extends javax.swing.JPanel {
         paneDetalhamento.setBorder(new RoundBorder(new Color(217, 50, 128), 50, 10));
         paneDetalhamento.setBounds(33, 125, 200, 50);
         jPanel3.add(paneDetalhamento);
-        
-        
     }
     
     public void config() {
@@ -185,15 +173,7 @@ public class Painel2 extends javax.swing.JPanel {
                     arquivo.delete();
                     System.exit(0);
                     
-                } else {
-                    
                 }
-
-                // cria um arquivo txt com os seguintes dados:
-                // lucro, investimento, faturamento, tempo para vender toda a leva, media de vendas por dia, 
-                // media de ganho por dia
-
-                // serializa o arquivo
             }
         });
         

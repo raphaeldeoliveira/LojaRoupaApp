@@ -38,8 +38,6 @@ public class Painel3 extends javax.swing.JPanel {
     JLabel botaoFiltros = new JLabel("Filtros");
     JPanel paneFiltrar = new JPanel();
     JLabel botaoFiltrar = new JLabel("Filtrar");
-    JPanel paneAlterarPrecoCompra = new JPanel();
-    JLabel botaoAlterarPrecoCompra = new JLabel("Alterar PC");
     JPanel paneAlterarPrecoVenda = new JPanel();
     JLabel botaoAlterarPrecoVenda = new JLabel("Alterar PV");
     
@@ -117,19 +115,14 @@ public class Painel3 extends javax.swing.JPanel {
         jPanel1.add(horizontal10);
         
         JPanel horizontal11 = new JPanel();
-        horizontal11.setBounds(301, 92, 119, 8);
+        horizontal11.setBounds(301, 129, 119, 8);
         horizontal11.setBackground(Color.WHITE);
         jPanel1.add(horizontal11);
         
         JPanel horizontal12 = new JPanel();
-        horizontal12.setBounds(301, 126, 119, 11);
+        horizontal12.setBounds(301, 163, 119, 8);
         horizontal12.setBackground(Color.WHITE);
         jPanel1.add(horizontal12);
-        
-        JPanel horizontal13 = new JPanel();
-        horizontal13.setBounds(301, 163, 119, 8);
-        horizontal13.setBackground(Color.WHITE);
-        jPanel1.add(horizontal13);
         
         // botao filtros
         botaoFiltros.setBounds(337, 384, 100, 30);
@@ -199,24 +192,13 @@ public class Painel3 extends javax.swing.JPanel {
         paneVendido.setBounds(302, 175, 117, 36);
         jPanel1.add(paneVendido);
         
-        // adiciona o botao de alterar Preço de compra
-        botaoAlterarPrecoCompra.setBounds(322, 136, 100, 30);
-        botaoAlterarPrecoCompra.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
-        botaoAlterarPrecoCompra.setForeground(Color.WHITE);
-        jPanel1.add(botaoAlterarPrecoCompra);
-        
-        paneAlterarPrecoCompra.setBounds(301, 132, 117, 36);
-        paneAlterarPrecoCompra.setBackground(new Color(217, 50, 138));
-        paneAlterarPrecoCompra.setBorder(new RoundBorder(Color.WHITE, 50, 11));
-        jPanel1.add(paneAlterarPrecoCompra);
-        
         // adiciona o botao de alterar Preço de venda
-        botaoAlterarPrecoVenda.setBounds(322, 99, 100, 30);
+        botaoAlterarPrecoVenda.setBounds(322, 136, 100, 30);
         botaoAlterarPrecoVenda.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
         botaoAlterarPrecoVenda.setForeground(Color.WHITE);
         jPanel1.add(botaoAlterarPrecoVenda);
         
-        paneAlterarPrecoVenda.setBounds(301, 95, 117, 36);
+        paneAlterarPrecoVenda.setBounds(301, 132, 117, 36);
         paneAlterarPrecoVenda.setBackground(new Color(217, 50, 138));
         paneAlterarPrecoVenda.setBorder(new RoundBorder(Color.WHITE, 50, 11));
         jPanel1.add(paneAlterarPrecoVenda);
@@ -246,9 +228,6 @@ public class Painel3 extends javax.swing.JPanel {
             for (int i=0;i<Janela.produtosVendidos.size();i++) {
                 listaProdutosVendidos.addElement(Janela.produtosVendidos.get(i).getNome());
             }
-        }
-        else {
-            System.out.println("aaaaaa");
         }
     }
     
@@ -404,26 +383,6 @@ public class Painel3 extends javax.swing.JPanel {
                 }
                 
                 iniciou = false;
-                
-                
-                // codigo velho
-                /*int index = jList2.getSelectedIndex();
-
-                // adiciona o produto a lista de listados e ao seu model
-                Janela.produtosListados.add(Janela.produtosVendidos.get(index));
-                listaProdutosListados.addElement(Janela.produtosVendidos.get(index).getNome());
-
-                // remove o produto da lista de vendidos e ao seu model
-                listaProdutosVendidos.removeElement(Janela.produtosVendidos.get(index).getNome());
-                Janela.produtosVendidos.remove(index);
-
-                // atualiza os models
-                jList1.setModel(listaProdutosListados);
-                jList2.setModel(listaProdutosVendidos);
-
-                // faz a serialização 
-                Janela.serializar();*/
-                
             }
         });
         
@@ -501,25 +460,6 @@ public class Painel3 extends javax.swing.JPanel {
                          
                      }
                 }
-
-                
-                
-                // CODIGO VELHO
-                /*// adiciona o produto a lista de vendidos e ao seu model
-                Janela.produtosVendidos.add(Janela.produtosListados.get(index));
-                listaProdutosVendidos.addElement(Janela.produtosListados.get(index).getNome());
-
-                // remove o produto da lista de listados e ao seu model
-                listaProdutosListados.removeElement(Janela.produtosListados.get(index).getNome());
-                Janela.produtosListados.remove(index);
-
-                // atualiza os models
-                jList1.setModel(listaProdutosListados);
-                jList2.setModel(listaProdutosVendidos);
-
-                // faz a serialização 
-                Janela.serializar();*/
-                
             }
         });
         
@@ -617,8 +557,6 @@ public class Painel3 extends javax.swing.JPanel {
                     }
                 }
 
-                // ATUALIZACAONOVA
-
                 if (genero.equals("") && categoria.equals("")) {
                     // se os filtros forem vazios mostra tudo
                     jList1.setModel(listaProdutosListados);
@@ -686,68 +624,6 @@ public class Painel3 extends javax.swing.JPanel {
                     jList1.setModel(listaProdutosListadosVazia);
                     jList2.setModel(listaProdutosVendidosVazia);
                 }
-
-
-                // CODIGO VELHO
-                /*for (int i=0;i<Janela.produtosListados.size();i++) {
-                    if (Janela.produtosListados.get(i).getGenero().equals(genero) || Janela.produtosListados.get(i).getCategoria().equals(categoria)) {
-                        listaProdutosListadosVazia.addElement(Janela.produtosListados.get(i).getNome());
-                    }
-                }
-                jList1.setModel(listaProdutosListadosVazia);
-
-                filtrado = true;*/
-                
-                
-                
-            }
-        });
-        
-        paneAlterarPrecoCompra.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                
-                int index = -1;
-                
-                if (jList2.getSelectedIndex() >= 0) {
-                    JOptionPane.showMessageDialog(null, "O produto deve estar listado para ter o preço alterado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    if (jList1.getSelectedIndex() < 0) {
-                        JOptionPane.showMessageDialog(null, "Algum produto listado deve ser selecionado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        index = jList1.getSelectedIndex();
-                
-                        // verifica se esta com a lista filtrada ou na padrao
-                        if (iniciou == true) {
-                            // encontra o index equivalente na lista padrao
-                            // pega do listaProdutosListadosVazia
-                            String produtoFiltrado = listaProdutosListadosVazia.get(index);
-                            // acha o indice no listaProdutosListados
-                            for (int i=0;i<listaProdutosListados.size();i++) {
-                                if (listaProdutosListados.get(i).equals(produtoFiltrado)) {
-                                    index = i;
-                                }
-                            }
-                        }
-                        
-                        // Cria uma nova instância do objeto Produto para a célula específica
-                        Produto p1 = null;
-                        p1 = new Produto(Janela.produtosListados.get(index).getNome(), Float.parseFloat(JOptionPane.showInputDialog("Digite o novo preço de compra:")), Janela.produtosListados.get(index).getPrecoVenda(), Janela.produtosListados.get(index).getCategoria(), Janela.produtosListados.get(index).getGenero());
-                        
-                        // Atualiza a célula específica com o novo objeto Produto
-                        Janela.produtosListados.set(index, p1);
-                    }
-                }
-                
-                // atualiza o card de informações a direita
-                jLabel13.setText(Janela.produtosListados.get(index).getGenero());
-                jLabel8.setText(Janela.produtosListados.get(index).getCategoria());
-                jLabel9.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoCompra()));
-                jLabel10.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoVenda()));
-                jLabel11.setText(String.valueOf(Janela.produtosListados.get(index).getLucro()));
-                
             }
         });
         
@@ -755,6 +631,8 @@ public class Painel3 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
+                float lastPreco = -1;
+                float novoPV = -1;
                 int index = -1;
                 
                 if (jList2.getSelectedIndex() >= 0) {
@@ -780,21 +658,41 @@ public class Painel3 extends javax.swing.JPanel {
                             }
                         }
                         
+                        lastPreco = Janela.produtosListados.get(index).getPrecoVenda();
+                        
                         // Cria uma nova instância do objeto Produto para a célula específica
                         Produto p1 = null;
-                        p1 = new Produto(Janela.produtosListados.get(index).getNome(), Janela.produtosListados.get(index).getPrecoCompra(), Float.parseFloat(JOptionPane.showInputDialog("Digite o novo preço de compra:")), Janela.produtosListados.get(index).getCategoria(), Janela.produtosListados.get(index).getGenero());
+                        novoPV = Float.parseFloat(JOptionPane.showInputDialog("Digite o novo preço de compra:"));
+                        p1 = new Produto(Janela.produtosListados.get(index).getNome(), Janela.produtosListados.get(index).getPrecoCompra(), novoPV, Janela.produtosListados.get(index).getCategoria(), Janela.produtosListados.get(index).getGenero());
                         
                         // Atualiza a célula específica com o novo objeto Produto
                         Janela.produtosListados.set(index, p1);
+                        
+                        if (lastPreco < novoPV) {
+                            Janela.lucroEsperado = Janela.lucroEsperado + (novoPV - lastPreco);
+                            Janela.faturamentoEsperado = Janela.faturamentoEsperado + (novoPV - lastPreco);
+                        }
+                        else {
+                            Janela.lucroEsperado = Janela.lucroEsperado - (lastPreco - novoPV);
+                            Janela.faturamentoEsperado = Janela.faturamentoEsperado - (lastPreco - novoPV);
+                        }
+
+                        Janela.serializar();
+
+                        Janela.p6.definirValoresCaixas();
+                        Janela.p6.atualizarPercentuais();
+                
+                        Janela.p2.dadosFinanceirosIniciais();
+
+                        // atualiza o card de informações a direita
+                        jLabel13.setText(Janela.produtosListados.get(index).getGenero());
+                        jLabel8.setText(Janela.produtosListados.get(index).getCategoria());
+                        jLabel9.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoCompra()));
+                        jLabel10.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoVenda()));
+                        jLabel11.setText(String.valueOf(Janela.produtosListados.get(index).getLucro()));
+                        
                     }
                 }
-                
-                // atualiza o card de informações a direita
-                jLabel13.setText(Janela.produtosListados.get(index).getGenero());
-                jLabel8.setText(Janela.produtosListados.get(index).getCategoria());
-                jLabel9.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoCompra()));
-                jLabel10.setText(String.valueOf(Janela.produtosListados.get(index).getPrecoVenda()));
-                jLabel11.setText(String.valueOf(Janela.produtosListados.get(index).getLucro()));
                 
             }
         });
@@ -1264,21 +1162,17 @@ public class Painel3 extends javax.swing.JPanel {
         // barra de busca - key release - LISTADOS
         jTextField1.setForeground(Color.BLACK);
         busca = jTextField1.getText();
-        System.out.println("busca: "+busca);
-        System.out.println("length" +busca.length());
         
         if (busca.equals("")) {
             jList1.setModel(listaProdutosListados);
             listaProdutosListadosVazia.removeAllElements();
             listaProdutosListadosTemp.removeAllElements();
-            System.out.println("limpou");
             iniciou = false;
         }
         else {
             if (iniciou == true) {
                 // executa pra somente um caracter
                 if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                    System.out.println("tamanho do listaProdutosTemp: "+listaProdutosListadosTemp.size());
                     for (int i=0;i<listaProdutosListadosTemp.size();i++) {
                         
                         if (String.valueOf(listaProdutosListadosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
@@ -1293,20 +1187,11 @@ public class Painel3 extends javax.swing.JPanel {
                     
                     int tamanhoLista = listaProdutosListadosVazia.size();
                     for (int i = tamanhoLista - 1; i >= 0; i--) {
-                        System.out.println("comparando: "+listaProdutosListadosVazia.get(i).charAt(busca.length()-1)+" -- "+busca.charAt(busca.length()-1));
                         if (!String.valueOf(listaProdutosListadosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                             
                             listaProdutosListadosTemp.addElement(listaProdutosListadosVazia.get(i));
-                            System.out.println("deletado: "+listaProdutosListadosVazia.remove(i));
                             //listaProdutosVazia.remove(i);
-                           
-                            System.out.println("listaTemp");
                         }
-                        else {
-                            System.out.println("ELSEZADA");
-                        }
-                        
-                        
                     }
                     
                     for (int i=0;i<listaProdutosListadosTemp.size();i++) {
@@ -1324,7 +1209,6 @@ public class Painel3 extends javax.swing.JPanel {
                         listaProdutosListadosVazia.addElement(listaProdutosListados.get(i));
                         iniciou = true;
                         jList1.setModel(listaProdutosListadosVazia);
-                        System.out.println("listaPadrao");
                     }
                 }
             }
@@ -1374,21 +1258,17 @@ public class Painel3 extends javax.swing.JPanel {
         // barra de busca - key release - VENDIDOS
         jTextField2.setForeground(Color.BLACK);
         busca = jTextField2.getText();
-        System.out.println("busca: "+busca);
-        System.out.println("length" +busca.length());
         
         if (busca.equals("")) {
             jList2.setModel(listaProdutosVendidos);
             listaProdutosVendidosVazia.removeAllElements();
             listaProdutosVendidosTemp.removeAllElements();
-            System.out.println("limpou");
             iniciou2 = false;
         }
         else {
             if (iniciou2 == true) {
                 // executa pra somente um caracter
                 if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                    System.out.println("tamanho do listaProdutosTemp: "+listaProdutosListadosTemp.size());
                     for (int i=0;i<listaProdutosVendidosTemp.size();i++) {
                         
                         if (String.valueOf(listaProdutosVendidosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
@@ -1403,20 +1283,11 @@ public class Painel3 extends javax.swing.JPanel {
                     
                     int tamanhoLista = listaProdutosVendidosVazia.size();
                     for (int i = tamanhoLista - 1; i >= 0; i--) {
-                        System.out.println("comparando: "+listaProdutosVendidosVazia.get(i).charAt(busca.length()-1)+" -- "+busca.charAt(busca.length()-1));
                         if (!String.valueOf(listaProdutosVendidosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                             
                             listaProdutosVendidosTemp.addElement(listaProdutosVendidosVazia.get(i));
-                            System.out.println("deletado: "+listaProdutosVendidosVazia.remove(i));
                             //listaProdutosVazia.remove(i);
-                           
-                            System.out.println("listaTemp");
                         }
-                        else {
-                            System.out.println("ELSEZADA");
-                        }
-                        
-                        
                     }
                     
                     for (int i=0;i<listaProdutosVendidosTemp.size();i++) {
@@ -1434,7 +1305,6 @@ public class Painel3 extends javax.swing.JPanel {
                         listaProdutosVendidosVazia.addElement(listaProdutosVendidos.get(i));
                         iniciou2 = true;
                         jList2.setModel(listaProdutosVendidosVazia);
-                        System.out.println("listaPadrao");
                     }
                 }
             }

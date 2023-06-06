@@ -1,8 +1,33 @@
-ta dando um errinho no admin, na gestao de usuarios
+duvida albiero
 
-usar a parada que o ruan mostrou para definir a quantidade e o tipo de caracteres que o textfield aceita
+como implementar:
 
-botar um icone no executavel para rodar no programa:
-propriedades -> clean and build -> generate javadoc
+- Utilizar pelo menos uma classe abstrata.
+- Utilizar herança.
+- Implementar pelo menos uma interface.
 
-nao ta alterando os detalhes e lucro, faturamentoreal, etc quando altera o PV e PC
+##tratar o maximo possivel de excessões
+
+perguntar se os botoes e jpanels tem que ficar no controller ou se eu posso botar dentro dos paineis
+
+===============================================================
+
+MVC:
+
+quando o produto for extraviado ele tem que chama o metodo no controler que atualiza e chama o metodo no painel6 pra atualizar os valores
+
+p6:
+
+produtoVendido
+produtoAdicionado => atualizarValore
+atualizarPercentuais
+
+atualizarLucroFaturamentoReal
+adicionatItemSerializado = atualizar percentuais + atualizarVaores
+
+p2:
+
+atualizarLucroFaturamentoReal
+dadosFinanceirosIniciais => atualizarValores
+novoProdutoAdicionado
+produtoVendido

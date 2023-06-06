@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import static lojaapp.LojaApp.controller;
 
 
 public class Painel1 extends javax.swing.JPanel {
@@ -63,7 +64,7 @@ public class Painel1 extends javax.swing.JPanel {
         passwordField.setVisible(false);
         
         jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-            jTextField1.setText("Usuario ou Email");
+        jTextField1.setText("Usuario ou Email");
     }
     
     public void deixarVerticesArredondados() {
@@ -88,8 +89,6 @@ public class Painel1 extends javax.swing.JPanel {
 
         jPanel1.add(labelBotaoLogin);
         jPanel1.add(panelBotaoLogin);
-
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         iconeUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lojaapp/imagens/icon-login.png")));
         iconeUser.setBounds(494, 116, 70, 90);
@@ -208,8 +207,10 @@ public class Painel1 extends javax.swing.JPanel {
                 jTextField1.setText("");
                 passwordField.setText(String.valueOf(""));
                 
-                // valida os inputs
-                if (user.equals("admin") && senha.equals("admin")) {
+                controller.logar(user, senha);
+                
+                /// valida os inputs
+                /*if (user.equals("admin") && senha.equals("admin")) {
                     JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                     janela.getContentPane().remove(Janela.p1);
                     janela.add(Janela.p7, BorderLayout.CENTER);
@@ -232,7 +233,7 @@ public class Painel1 extends javax.swing.JPanel {
                         thread.start();
 
                     }
-                }
+                }*/
             }
         });
         
@@ -248,19 +249,23 @@ public class Painel1 extends javax.swing.JPanel {
         labelCriarConta.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Janela.p5 = new Painel5();
+                controller.criarConta();
+                /*Janela.p5 = new Painel5();
                 JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                 janela.getContentPane().remove(Janela.p1);
                 janela.add(Janela.p5, BorderLayout.CENTER);
-                janela.pack();
+                janela.pack();*/
             }
         });
         
         jTextField1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                jTextField1.setText("");
-                jTextField1.setForeground(Color.BLACK);
+                
+                if (jTextField1.getText().equals("Usuario ou Email")) {
+                    jTextField1.setText("");
+                    jTextField1.setForeground(Color.BLACK);
+                }
             }
         });
         
@@ -370,16 +375,11 @@ public class Painel1 extends javax.swing.JPanel {
         // botao mostrar senha
 
         if (mostrarSenha == false) {
-
-            /*char[] password = passwordField.getPassword();
-            String senha = new String(password);
-            System.out.println("Senha digitada: " + senha);*/
             
             passwordField.setEchoChar((char) 0);
 
         }
         else {
-            //jTextField2.setText(asterisco);
             passwordField.setEchoChar('*');
         }
 

@@ -205,12 +205,6 @@ public class Janela extends javax.swing.JFrame {
         horaInicio = LocalTime.now();
     }
     
-    public static void criarRelatorioDaLeva() {
-        
-        RelatorioDaLeva relatorio = new RelatorioDaLeva();
-        
-    }
-    
     public static void pegarTempoFimSessao() {
         while (true) {
             try {

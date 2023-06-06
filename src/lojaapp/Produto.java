@@ -81,15 +81,4 @@ public class Produto implements Serializable {
        }
    }
    
-   public void gerarCodigo() {
-       String codigo = "";
-       String produto = getNome();
-       String primeiraLetra = String.valueOf(produto.charAt(0));
-       
-       switch (primeiraLetra) {
-           case "a":
-               
-       }
-   }
-   
 }

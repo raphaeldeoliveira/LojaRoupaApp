@@ -60,10 +60,7 @@ public class Painel7 extends javax.swing.JPanel {
             listaUsuarios.addElement(Janela.usuarios.get(i).getUsuario());
         }
         jList2.setModel(listaUsuarios);
-        
-        System.out.println("index^: "+index);
         if (index >= 0) {
-            System.out.println("yyyyyyyyyyyy");
             jRadioButton1.setText(Janela.usuarios.get(index).getUsuario());
             jRadioButton2.setText(Janela.usuarios.get(index).getEmail());
             jRadioButton3.setText(Janela.usuarios.get(index).getSenha());
@@ -124,25 +121,25 @@ public class Painel7 extends javax.swing.JPanel {
         // Cobertura 2
         
         JPanel vertical3 = new JPanel();
-        vertical3.setBounds(193, 375, 13, 40);
-        vertical3.setBackground(new Color(217, 50, 128));
+        vertical3.setBounds(188, 370, 13, 40);
+        vertical3.setBackground(new Color(217,50,128));
         jPanel2.add(vertical3);
         
         JPanel vertical4 = new JPanel();
-        vertical4.setBounds(314, 375, 13, 40);
-        vertical4.setBackground(new Color(217, 50, 128));
+        vertical4.setBounds(309, 370, 13, 40);
+        vertical4.setBackground(new Color(217,50,128));
         jPanel2.add(vertical4);
         
         // Botões 2
         
         labelBotaoVoltar.setForeground(new Color(217,50,128));
-        labelBotaoVoltar.setBounds(239, 380, 120, 30);
+        labelBotaoVoltar.setBounds(234, 375, 120, 30);
         labelBotaoVoltar.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
         jPanel2.add(labelBotaoVoltar);
         
         panelBotaoVoltar.setBackground(Color.WHITE);
         panelBotaoVoltar.setBorder(new RoundBorder(new Color(217,50,128), 50, 11));
-        panelBotaoVoltar.setBounds(200, 375, 120, 36);
+        panelBotaoVoltar.setBounds(195, 370, 120, 36);
         jPanel2.add(panelBotaoVoltar);
         
     }
@@ -165,14 +162,20 @@ public class Painel7 extends javax.swing.JPanel {
                         Janela.serializarUsuarios();
                         listaUsuarios.remove(index);
                         jList2.setModel(listaUsuarios);
-                        System.out.println("fio");
 
                     }
 
                     // deixa apontado para o proximo elemento da lista
                     jList2.setSelectedIndex(0);
                 }
+                
+                jList2.clearSelection();
+                jRadioButton1.setText("");
+                jRadioButton2.setText("");
+                jRadioButton3.setText("");
+                
             }
+            
         });
         
         panelBotaoAlterar.addMouseListener(new MouseAdapter() {
@@ -187,13 +190,11 @@ public class Painel7 extends javax.swing.JPanel {
                 else {
                     index = jList2.getSelectedIndex();
                     lastIndex = index;
-                    System.out.println("indexaaaaa: "+index);
 
                     if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected() && !jRadioButton3.isSelected()) {
-                        System.out.println("Selecione algum atributo do usuario para alterar!");
+                        JOptionPane.showMessageDialog(null, "Selecione algum atributo do usuario para alterar!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
                     }
                     else {
-                        System.out.println("7979879");
                         if (jRadioButton1.isSelected()) {
                             // pega o input do dado alterado
                             String novoUsuario = JOptionPane.showInputDialog("Digite o novo usuário:");
@@ -290,13 +291,19 @@ public class Painel7 extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jList2);
 
+        jRadioButton1.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("<usuario>");
 
+        jRadioButton2.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("<email>");
 
+        jRadioButton3.setBackground(new java.awt.Color(217, 50, 128));
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("<senha>");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -317,13 +324,13 @@ public class Painel7 extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton3)
-                .addGap(37, 37, 37))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 36)); // NOI18N

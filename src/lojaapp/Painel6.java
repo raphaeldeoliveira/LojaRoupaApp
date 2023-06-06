@@ -32,13 +32,8 @@ public class Painel6 extends javax.swing.JPanel {
     JLabel precoCompraExtravio = new JLabel("R$ ");
     JLabel precoVendaExtravio = new JLabel("R$ ");
     
-    public static int quantidadeExtraviados;
-    public static float somatorioPVExtraviados;
-    public static float somatorioPCExtraviados;
-    
     public Painel6() {
         initComponents();
-        definirValoresCaixas();
         adicionarBotoes();
         config();
     }
@@ -71,7 +66,6 @@ public class Painel6 extends javax.swing.JPanel {
         jPanel6.setBorder(new BordaTracejada(Color.WHITE, 3, 5));
         
         // Labels de titulos e monetarios dos paineis
-        
         investimento.setBounds(35, 25, 140, 31);
         investimento.setFont(new Font("Dialog", Font.BOLD, 20));
         investimento.setForeground(Color.WHITE);
@@ -143,122 +137,16 @@ public class Painel6 extends javax.swing.JPanel {
         jPanel6.add(precoVendaExtravio);
     }
     
-    public void atualizarLucroFaturamentoReal() {
-        numeroFaturamento.setText("R$ ".concat(String.valueOf(Janela.faturamentoReal)));
-        //numeroFaturamento.setText(String.valueOf(Janela.faturamentoReal));
-        numeroLucro.setText("R$ ".concat(String.valueOf(Janela.lucroReal)));
-        //numeroLucro.setText(String.valueOf(Janela.lucroReal));
-        atualizarPercentuais();
-    }
-    
-    public String formatarTexto(float money) {
-        
-        String moneyString;
-        float aux = 0;
-        if (money > 999) {
-           aux = money % 1000;
-           
-           int aux2 = (int) money / 1000;
-        
-            moneyString = "R$ ".concat(String.valueOf(aux2));
-            moneyString = moneyString.concat(",");
-            moneyString = moneyString.concat(String.valueOf(aux));
-
-            moneyString = moneyString.substring(0, (moneyString.indexOf(".") + 3));
-
-            moneyString = moneyString.replaceFirst("\\.", ",");
-            moneyString = moneyString.replaceFirst(",", "\\.");
-        }
-        else {
-            moneyString = "";
-        }
-        
-        
-        return moneyString;
-    }
-    
-    public void definirValoresCaixas() {
-        // define o investimento
-        numeroInvestimento.setText("R$ ".concat(String.valueOf(Janela.investimento)));
-        //numeroInvestimento.setText(String.valueOf(Janela.investimento));
-        
-        // define o faturamento real
-        numeroFaturamento.setText(String.valueOf(Janela.faturamentoReal));
-        
-        // define o lucro real
-        numeroLucro.setText("R$ ".concat(String.valueOf(Janela.lucroReal)));
-        //numeroLucro.setText(String.valueOf(Janela.lucroReal));
-        
-        // define o faturamento esperado
-        numeroFaturamentoEsperado.setText("R$ ".concat(String.valueOf(Janela.faturamentoEsperado)));
-        //numeroFaturamentoEsperado.setText(String.valueOf(Janela.faturamentoEsperado));
-        
-        // define o lucro esperado
-        numeroLucroEsperado.setText("R$ ".concat(String.valueOf(Janela.lucroEsperado)));
-        //numeroLucroEsperado.setText(String.valueOf(Janela.lucroEsperado));
-    }
-    
-    public void produtoVendido(float precoCompra, float precoVenda) {
-        // atualiza as labels
-        numeroFaturamento.setText(String.valueOf(Janela.faturamentoReal));
-        numeroLucro.setText("R$ ".concat(String.valueOf(Janela.lucroReal)));
-        //numeroLucro.setText(String.valueOf(Janela.lucroReal));
-        atualizarPercentuais();
-    }
-    
-    public void produtoAdicionado() {
-        numeroInvestimento.setText("R$ ".concat(String.valueOf(Janela.investimento)));
-        //numeroInvestimento.setText(String.valueOf(Janela.investimento));
-        numeroFaturamentoEsperado.setText("R$ ".concat(String.valueOf(Janela.faturamentoEsperado)));
-        //numeroFaturamentoEsperado.setText(String.valueOf(Janela.faturamentoEsperado));
-        numeroLucroEsperado.setText("R$ ".concat(String.valueOf(Janela.lucroEsperado)));
-        //numeroLucroEsperado.setText(String.valueOf(Janela.lucroEsperado));
-    }
-    
-    public void produtoExtraviado(float pc, float pv) {
-        quantidadeExtraviados++;
-        somatorioPCExtraviados = somatorioPCExtraviados + pc;
-        somatorioPVExtraviados = somatorioPVExtraviados + pv;
-        
+    public void atualizarValores(int quantidadeExtraviados, float somatorioPVExtraviados, float somatorioPCExtraviados, float investimento, float faturamentoEsperado, float lucroEsperado, float faturamentoReal, float lucroReal, int porcentagemFaturamento, int porcentagemLucro) {
         numeroExtravio.setText(String.valueOf(quantidadeExtraviados));
         precoVendaExtravio.setText("R$ ".concat(String.valueOf(somatorioPVExtraviados)));
-        //precoVendaExtravio.setText(String.valueOf(somatorioPVExtraviados));
         precoCompraExtravio.setText("R$ ".concat(String.valueOf(somatorioPCExtraviados)));
-        //precoCompraExtravio.setText(String.valueOf(somatorioPCExtraviados));
-        
-        Janela.serializar();
-    }
-    
-    public void adicionarItensSerializados() {
-        numeroInvestimento.setText("R$ ".concat(String.valueOf(Janela.investimento)));
-        //numeroInvestimento.setText(String.valueOf(Janela.investimento));
-        
-        numeroFaturamento.setText("R$ ".concat(String.valueOf(Janela.faturamentoReal)));
-        //numeroFaturamento.setText(String.valueOf(Janela.faturamentoReal));
-        numeroLucro.setText("R$ ".concat(String.valueOf(Janela.lucroReal)));
-        //numeroLucro.setText(String.valueOf(Janela.lucroReal));
-        int porcentagemFaturamento = Math.round((Janela.faturamentoReal * 100) / Janela.faturamentoEsperado);
+        numeroInvestimento.setText("R$ ".concat(String.valueOf(investimento)));
+        numeroFaturamentoEsperado.setText("R$ ".concat(String.valueOf(faturamentoEsperado)));
+        numeroLucroEsperado.setText("R$ ".concat(String.valueOf(lucroEsperado)));
+        numeroFaturamento.setText(String.valueOf(faturamentoReal));
+        numeroLucro.setText("R$ ".concat(String.valueOf(lucroReal)));
         percentualFaturamento.setText(String.valueOf(porcentagemFaturamento)+"%");
-        int porcentagemLucro = Math.round((Janela.lucroReal * 100) / Janela.lucroEsperado);
-        percentualLucro.setText(String.valueOf(porcentagemLucro)+"%");
-        
-        numeroFaturamentoEsperado.setText("R$ ".concat(String.valueOf(Janela.faturamentoEsperado)));
-        //numeroFaturamentoEsperado.setText(String.valueOf(Janela.faturamentoEsperado));
-        numeroLucroEsperado.setText("R$ ".concat(String.valueOf(Janela.lucroEsperado)));
-        //numeroLucroEsperado.setText(String.valueOf(Janela.lucroEsperado));
-        
-        numeroExtravio.setText(String.valueOf(quantidadeExtraviados));
-        precoVendaExtravio.setText("R$ ".concat(String.valueOf(somatorioPVExtraviados)));
-        //precoVendaExtravio.setText(String.valueOf(somatorioPVExtraviados));
-        precoCompraExtravio.setText("R$ ".concat(String.valueOf(somatorioPCExtraviados)));
-        //precoCompraExtravio.setText(String.valueOf(somatorioPCExtraviados));
-        
-    }
-    
-    public void atualizarPercentuais() {
-        int porcentagemFaturamento = Math.round((Janela.faturamentoReal * 100) / Janela.faturamentoEsperado);
-        percentualFaturamento.setText(String.valueOf(porcentagemFaturamento)+"%");
-        int porcentagemLucro = Math.round((Janela.lucroReal * 100) / Janela.lucroEsperado);
         percentualLucro.setText(String.valueOf(porcentagemLucro)+"%");
     }
     
@@ -268,10 +156,7 @@ public class Painel6 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // passa para o painel de adicionar items
-                JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
-                janela.getContentPane().remove(Janela.p6);
-                janela.add(Janela.p2, BorderLayout.CENTER);
-                janela.pack();
+                LojaApp.controller.voltarP6();
             }
         });
         
