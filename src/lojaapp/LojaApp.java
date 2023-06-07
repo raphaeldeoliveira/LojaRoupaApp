@@ -1,7 +1,5 @@
 package lojaapp;
 
-import java.awt.Font;
-import javax.swing.UIManager;
 import lojaapp.Controller.Controller;
 
 public class LojaApp {

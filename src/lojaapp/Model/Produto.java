@@ -1,4 +1,4 @@
-package lojaapp;
+package lojaapp.Model;
 
 import java.io.Serializable;
 

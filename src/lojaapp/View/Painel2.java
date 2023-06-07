@@ -1,19 +1,14 @@
 package lojaapp.View;
 
 import lojaapp.*;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import lojaapp.Model.RoundBorder;
 
 public class Painel2 extends javax.swing.JPanel {
 
@@ -166,7 +161,7 @@ public class Painel2 extends javax.swing.JPanel {
             public void mouseClicked(MouseEvent e) {
                 int resposta = JOptionPane.showOptionDialog(null,"Deseja continuar?\nTodos os dados serão apagados","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
         
-                LojaApp.controller.novaLevaProdutos(resposta);
+                LojaApp.controller.botaoNovaLevaProdutos(resposta);
             }
         });
         
@@ -174,7 +169,7 @@ public class Painel2 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // passa para o painel de adicionar items
-                LojaApp.controller.adicionarItem();
+                LojaApp.controller.botaoAdicionarItem();
             }
         });
         
@@ -182,7 +177,7 @@ public class Painel2 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // passa para o painel de vender items
-                LojaApp.controller.venderItem();
+                LojaApp.controller.botaoVenderItem();
             }
         });
         
@@ -190,7 +185,7 @@ public class Painel2 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // passa para o painel de detalhamento
-                LojaApp.controller.detalhamento();
+                LojaApp.controller.botaoDetalhamento();
             }
         });
         

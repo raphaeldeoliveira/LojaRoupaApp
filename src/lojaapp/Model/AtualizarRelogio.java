@@ -15,7 +15,7 @@ public class AtualizarRelogio extends Thread {
             int minuto = horaAtual.getMinute();
             int segundo = horaAtual.getSecond();
             
-            Janela.p2.atualizarRelogio(hora, minuto, segundo);
+            LojaApp.controller.atualizarRelogio(hora, minuto, segundo);
             
             try {
                 Thread.sleep(1000);

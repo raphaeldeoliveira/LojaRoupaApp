@@ -1,6 +1,5 @@
 package lojaapp.Model;
 
-import lojaapp.*;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {

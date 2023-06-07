@@ -1,29 +1,17 @@
 package lojaapp.View;
 
-import lojaapp.*;
-import com.sun.tools.javac.Main;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Image;
-import java.awt.event.KeyEvent;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.InputStream;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import static lojaapp.LojaApp.controller;
+import lojaapp.Model.RoundBorder;
 
 
 public class Painel1 extends javax.swing.JPanel {
@@ -59,7 +47,7 @@ public class Painel1 extends javax.swing.JPanel {
         config();
     }
     
-    public static void deixarTextFieldsPadrao() {
+    public void deixarTextFieldsPadrao() {
         jTextField2.setVisible(true);
         passwordField.setVisible(false);
         
@@ -175,22 +163,6 @@ public class Painel1 extends javax.swing.JPanel {
         
     }
     
-    public boolean validarDados(String user, String senha) {
-        
-        if (Janela.usuarios.isEmpty()) {
-            return false;
-        }
-        else {
-            for (int i=0;i<Janela.usuarios.size();i++) {
-                if ((user.equals(Janela.usuarios.get(i).getUsuario()) || user.equals(Janela.usuarios.get(i).getEmail())) && senha.equals(Janela.usuarios.get(i).getSenha())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-    }
-    
     public void config() {
         
         // Quando o painel LOGIN é clicado
@@ -207,8 +179,10 @@ public class Painel1 extends javax.swing.JPanel {
                 jTextField1.setText("");
                 passwordField.setText(String.valueOf(""));
                 
-                // valida os inputs
-                if (user.equals("admin") && senha.equals("admin")) {
+                controller.logar(user, senha);
+                
+                /// valida os inputs
+                /*if (user.equals("admin") && senha.equals("admin")) {
                     JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                     janela.getContentPane().remove(Janela.p1);
                     janela.add(Janela.p7, BorderLayout.CENTER);
@@ -231,7 +205,7 @@ public class Painel1 extends javax.swing.JPanel {
                         thread.start();
 
                     }
-                }
+                }*/
             }
         });
         
@@ -247,11 +221,12 @@ public class Painel1 extends javax.swing.JPanel {
         labelCriarConta.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Janela.p5 = new Painel5();
+                controller.criarConta();
+                /*Janela.p5 = new Painel5();
                 JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
                 janela.getContentPane().remove(Janela.p1);
                 janela.add(Janela.p5, BorderLayout.CENTER);
-                janela.pack();
+                janela.pack();*/
             }
         });
         

@@ -1,16 +1,13 @@
 package lojaapp.View;
 
 import lojaapp.*;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import lojaapp.Model.RoundBorder;
 
 public class Painel5 extends javax.swing.JPanel {
 
@@ -72,11 +69,7 @@ public class Painel5 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                // passa para o painel de login
-                JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
-                janela.getContentPane().remove(Janela.p5);
-                janela.add(Janela.p1, BorderLayout.CENTER);
-                janela.pack();
+                LojaApp.controller.botaoVoltarP5();
                 
             }
         });
@@ -89,39 +82,16 @@ public class Painel5 extends javax.swing.JPanel {
                 String email = jTextField3.getText();
                 String senha = jTextField2.getText();
 
-                // verifica se os campos foram preenchidos corertamente
-                if (usuario.trim().isEmpty() || email.trim().isEmpty() || senha.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser prenchidos!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    if (!email.contains("@")) {
-                        JOptionPane.showMessageDialog(null, "Email inválido!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                    
-                    // cria o objeto e armazena os valores
-                    Usuario u1 = new Usuario(usuario, senha, email);
-
-                    // adiciona ao arrayList
-                    Janela.usuarios.add(u1);
-
-                    // mensagem que deu certo
-                    JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!", "Angel Modas", JOptionPane.INFORMATION_MESSAGE);
-
-                    // limpar campos
-                    jTextField1.setText("");
-                    jTextField2.setText("");
-                    jTextField3.setText("");
-
-                    // faz a serialização
-                    Janela.serializarUsuarios();
-
-                    // atualiza o painel de usuarios cadastrados (p7)
-                    Janela.p7.carregarUsuariosAdicionados(usuario);
-                }
+                LojaApp.controller.cadastrarUsuario(usuario, email, senha);
             }
         });
         
+    }
+    
+    public void limparCampos() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
     }
 
     @SuppressWarnings("unchecked")

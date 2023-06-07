@@ -1,24 +1,10 @@
 package lojaapp.View;
 
-import lojaapp.*;
 import java.awt.BorderLayout;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Janela extends javax.swing.JFrame {
 
-    static Transicao t1;
+/*    static Transicao t1;
     
     static Painel1 p1;
     static Painel2 p2;
@@ -41,20 +27,20 @@ public class Janela extends javax.swing.JFrame {
     public static float faturamentoReal;
     public static float lucroReal;
     public static float faturamentoEsperado;
-    public static float lucroEsperado;
+    public static float lucroEsperado;*/
     
     public Janela() {
         initComponents();
         this.setLayout(new BorderLayout());
-        p1 = new Painel1();
+        /*p1 = new Painel1();
         
         this.add(p1, BorderLayout.CENTER);
         this.pack();
         pegarTempoInicioSessao();
         desserializar();
-        desserialziarUsuarios();
+        desserialziarUsuarios();*/
     }
-    
+    /*
     public static void serializar() {
         // instancia a classe de serialização
         Dados dado = new Dados();
@@ -71,9 +57,9 @@ public class Janela extends javax.swing.JFrame {
         dado.setFaturamentoEsperado(faturamentoEsperado);
         dado.setLucroEsperado(lucroEsperado);
         
-        dado.setQuantidadeExtraviados(Janela.p6.quantidadeExtraviados);
+        /*dado.setQuantidadeExtraviados(Janela.p6.quantidadeExtraviados);
         dado.setSomatorioPCExtraviados(Janela.p6.somatorioPCExtraviados);
-        dado.setSomatorioPVExtraviados(Janela.p6.somatorioPVExtraviados);
+        dado.setSomatorioPVExtraviados(Janela.p6.somatorioPVExtraviados);*
         // ! faltou o tempo de seção !
         
         try {
@@ -224,7 +210,7 @@ public class Janela extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
     
 
     @SuppressWarnings("unchecked")
@@ -246,39 +232,6 @@ public class Janela extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Janela().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

@@ -1,11 +1,6 @@
 package lojaapp.View;
 
-import lojaapp.Model.*;
-import lojaapp.*;
-import java.awt.BorderLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import lojaapp.LojaApp;
 
 public class Transicao extends javax.swing.JPanel implements Runnable {
 
@@ -19,11 +14,7 @@ public class Transicao extends javax.swing.JPanel implements Runnable {
             e.printStackTrace();
         }
         
-        Janela.p2 = new Painel2();
-        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(this);
-        janela.getContentPane().remove(Janela.t1);
-        janela.add(Janela.p2, BorderLayout.CENTER);
-        janela.pack();
+        LojaApp.controller.rodarTransicao();
 
     }
     

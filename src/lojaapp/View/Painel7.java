@@ -1,23 +1,19 @@
 package lojaapp.View;
 
 import lojaapp.*;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import lojaapp.Model.RoundBorder;
+import lojaapp.Model.Usuario;
 
 public class Painel7 extends javax.swing.JPanel {
 
-    DefaultListModel<String> listaUsuarios = new DefaultListModel<>();
-    
     JLabel labelBotaoDeletar = new JLabel("Deletar");
     JPanel panelBotaoDeletar = new JPanel();
     JLabel labelBotaoAlterar = new JLabel("Alterar");
@@ -25,49 +21,50 @@ public class Painel7 extends javax.swing.JPanel {
     JLabel labelBotaoVoltar = new JLabel("Voltar");
     JPanel panelBotaoVoltar = new JPanel();
     
-    int lastIndex = -1;
-    
     public Painel7() {
         initComponents();
         adicionarLabels();
         config();
     }
     
-    public void carregarUsuariosSerializados(ArrayList<Usuario> usuarios) {
-        
-        if (usuarios.isEmpty() == false) {
-            for (int i=0;i<usuarios.size();i++) {
-                listaUsuarios.addElement(usuarios.get(i).getUsuario());
-            }
-
-            jList2.setModel(listaUsuarios);
-
-            // deixa um usuario clicado
-            jList2.setSelectedIndex(0);
-            jRadioButton1.setText(usuarios.get(0).getUsuario());
-            jRadioButton2.setText(usuarios.get(0).getEmail());
-            jRadioButton3.setText(usuarios.get(0).getSenha());
-        }
+    public void setarModeloJlist2(DefaultListModel<String> listaUsuarios) {
+        jList2.setModel(listaUsuarios);
     }
     
-    public void carregarUsuariosAdicionados(String user) {
+    public void deixarUsuarioClicado(ArrayList<Usuario> usuarios) {
+        // deixa um usuario clicado
+        jList2.setSelectedIndex(0);
+        jRadioButton1.setText(usuarios.get(0).getUsuario());
+        jRadioButton2.setText(usuarios.get(0).getEmail());
+        jRadioButton3.setText(usuarios.get(0).getSenha());
+    }
+    
+    public void deixarIndexSelecionado(int lastIndex) {
+        jList2.setSelectedIndex(lastIndex);
+    }
+    
+    /*public void carregarUsuariosAdicionados(String user) {
         listaUsuarios.addElement(user);
         jList2.setModel(listaUsuarios);
+    }*/
+    
+    public void mostrarDadosUsuario(ArrayList<Usuario> usuarios, int index) {
+        jRadioButton1.setText(usuarios.get(index).getUsuario());
+        jRadioButton2.setText(usuarios.get(index).getEmail());
+        jRadioButton3.setText(usuarios.get(index).getSenha());
     }
     
     public void carregarUsuarioAlterado(int index) {
-        listaUsuarios.removeAllElements();
-        for (int i=0;i<Janela.usuarios.size();i++) {
-            listaUsuarios.addElement(Janela.usuarios.get(i).getUsuario());
-        }
-        jList2.setModel(listaUsuarios);
-        if (index >= 0) {
-            jRadioButton1.setText(Janela.usuarios.get(index).getUsuario());
-            jRadioButton2.setText(Janela.usuarios.get(index).getEmail());
-            jRadioButton3.setText(Janela.usuarios.get(index).getSenha());
-        } else {
-            
-        }
+        // ???
+        LojaApp.controller.carregarUsuarioAlterado(index);
+    }
+    
+    public void limparCampos() {
+        jList2.clearSelection();
+        jList2.setSelectedIndex(0);
+        jRadioButton1.setText("");
+        jRadioButton2.setText("");
+        jRadioButton3.setText("");
     }
     
     public void adicionarLabels() {
@@ -151,29 +148,8 @@ public class Painel7 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                if (jList2.getSelectedIndex() < 0) {
-                    JOptionPane.showMessageDialog(null, "Algum item da lista deve ser selecionado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    int resposta = JOptionPane.showOptionDialog(null,"Tem certeza que deseja deletar usuario?","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
-                    if (resposta == JOptionPane.YES_OPTION) {
-
-                        int index = jList2.getSelectedIndex();
-                        Janela.usuarios.remove(index);
-                        Janela.serializarUsuarios();
-                        listaUsuarios.remove(index);
-                        jList2.setModel(listaUsuarios);
-
-                    }
-
-                    // deixa apontado para o proximo elemento da lista
-                    jList2.setSelectedIndex(0);
-                }
-                
-                jList2.clearSelection();
-                jRadioButton1.setText("");
-                jRadioButton2.setText("");
-                jRadioButton3.setText("");
+                int index = jList2.getSelectedIndex();
+                LojaApp.controller.botaoDeletarUsuario(index);
                 
             }
             
@@ -182,64 +158,9 @@ public class Painel7 extends javax.swing.JPanel {
         panelBotaoAlterar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int index;
-                if (jList2.getSelectedIndex() < 0) {
-                    if (lastIndex > 0) {
-                        index = lastIndex;
-                    }
-                }
-                else {
-                    index = jList2.getSelectedIndex();
-                    lastIndex = index;
-
-                    if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected() && !jRadioButton3.isSelected()) {
-                        JOptionPane.showMessageDialog(null, "Selecione algum atributo do usuario para alterar!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        if (jRadioButton1.isSelected()) {
-                            // pega o input do dado alterado
-                            String novoUsuario = JOptionPane.showInputDialog("Digite o novo usuário:");
-                            if (novoUsuario != null) {
-                                Janela.usuarios.get(index).setUsuario(novoUsuario);
-                            } else {
-
-                            }
-                        }
-                        else {
-                            if (jRadioButton2.isSelected()) {
-                                // pega o input do dado alterado
-                                String novoEmail = JOptionPane.showInputDialog("Digite o novo email:");
-                                if (novoEmail != null) {
-                                    if (!novoEmail.contains("@")) {
-                                        JOptionPane.showMessageDialog(null, "email inválido. Operação cancelada!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
-                                    }
-                                    else {
-                                        Janela.usuarios.get(index).setEmail(novoEmail);
-                                    }
-                                } else {
-
-                                }
-                            }
-                            else {
-                                if (jRadioButton3.isSelected()) {
-                                    // pega o input do dado alterado
-                                    String novaSenha = JOptionPane.showInputDialog("Digite a nova senha:");
-                                    if (novaSenha != null) {
-                                        Janela.usuarios.get(index).setSenha(novaSenha);
-                                    } else {
-
-                                    }
-                                }
-                            }
-                        }
-
-                        Janela.serializarUsuarios();
-                        carregarUsuarioAlterado(index);
-                        jList2.setSelectedIndex(lastIndex);
-
-                    }
-                }
                 
+                int index = jList2.getSelectedIndex();
+                LojaApp.controller.botaoAlterarUsuario(index, jRadioButton1, jRadioButton2, jRadioButton3);
                 
             }
         });
@@ -248,18 +169,18 @@ public class Painel7 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                // atualiza os 2 textField para o padrao
-                Janela.p1.deixarTextFieldsPadrao();
-                
-                // passa para o painel 1
-                JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(jPanel1);
-                janela.getContentPane().remove(Janela.p7);
-                janela.add(Janela.p1, BorderLayout.CENTER);
-                janela.pack();
+                LojaApp.controller.botaoVoltarP7();
                 
             }
         });
         
+    }
+    
+    public void setTextRadio(ArrayList<Usuario> usuarios, int index) {
+        // atualiza os radio buttons
+        jRadioButton1.setText(usuarios.get(index).getUsuario());
+        jRadioButton2.setText(usuarios.get(index).getEmail());
+        jRadioButton3.setText(usuarios.get(index).getSenha());
     }
 
     @SuppressWarnings("unchecked")
@@ -380,12 +301,9 @@ public class Painel7 extends javax.swing.JPanel {
         
         int index = jList2.getSelectedIndex();
         
-        if (index >= 0) {
-            // atualiza os radio buttons
-            jRadioButton1.setText(Janela.usuarios.get(index).getUsuario());
-            jRadioButton2.setText(Janela.usuarios.get(index).getEmail());
-            jRadioButton3.setText(Janela.usuarios.get(index).getSenha());
-        }
+        LojaApp.controller.clicarJlist(index);
+        
+        
     }//GEN-LAST:event_jList2MouseClicked
 
 
