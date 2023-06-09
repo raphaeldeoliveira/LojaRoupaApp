@@ -1,0 +1,85 @@
+<titulo>Angel Modas<titulo>
+
+sumário
+
+1 - História
+   1.1 - Ideia
+   1.2 - Utilização
+   1.3 - O que ela achou?
+   1.4 - Conclusão
+
+2 - Sobre a GUI
+   2.1 - Introdução
+   2.2 - Janela
+   2.3 - Painel 1
+   2.4 - Painel 2
+   2.5 - Painel 3
+   2.6 - Painel 4
+   2.7 - Painel 5
+   2.8 - Painel 6
+   2.9 - Painel 7
+   2.10 - Transição
+
+3 - Recursos adicionais
+   3.1 - Como os dados são salvos
+   3.2 - Usuário admin
+
+===========================================
+
+HISTÓRIA
+
+IDEIA
+- A ideia surgiu pelo fato de minha namorada estar abrindo uma loja para vender roupas. Eu e o pai dela construimos a peça do zero. No momento da entrega do trabalho falta os acabamentos, montar a estrutura e comprar o estoque. Mas o sistema de gestão de estoque e controle já esta pronto (este trabalho). 
+
+*fotos da construção evoluindo*
+
+UTILIZAÇÃO
+- O sistema será usado no dia a dia da loja. Quando ela comprar a coleção para venda vai cadastrar todos os produtos e vai usar o sistema para ter um controle de: investimento, faturamento e lucro. Cada venda que for feita será atualizará no sistema. Dessa maneira vamos conseguir ter um controle da saude financeira da loja, bem como onde focar nossos esforços para melhoria da mesma
+
+O QUE ELA ACHOU
+- Palavras da dona da loja (minha namorada): "Gostei muito do programa estabelecido para mim. Irá me ajudar, tem tabela posso organizar na minha lojinha como resultados trazendo também mais rapidez e agilidade em contas onde tenho dificuldades com respostas objetivas. Porrtanto em um logotipo com meu nome trazendo idéia em demonstração tanto na etiqueta destaque valor quanto embrema ou placas de direcionamento local da loja.
+
+CONCLUSÃO
+- Com o projeto aprimorei muito minhas habilidades de desenvolver interfaces graficar bem como minha logica de orientação a objetos. Também aprendi fundamentos muito importantes como tratamento de excessões, uso de collections e serialização. O programa será peça fundamental no controle e na gestão da loja e nada disso seria possível sem a excelente didádica do professor Fernando Albiero.
+
+SOBRE A GUI
+
+INTRODUÇÃO
+
+O projeto segue o padrão Model View Controller. Os métodos principais ficam concetrados no controller, a view fica com os paineis e janelas enquanto o model tem os recursos adicionais. Neste capitulo vou explicar, de modo geral, como funcionam os paineis. Deixarei abstraido o controller e o model pois envolvem parte logicas, que não necessitam de muita explicação.
+
+JANELA
+- A janela serve como jframe para colocarmos os paineis em cima. Sendo parte essencial para o funcionamento da GUI
+
+PAINEL 1
+- Painel de login: Temos uma tela de login onde podemos encontrar os formularios para dar input no usuario e senha. Logo abaixo o checkbox para mostrar a senha, mais a baixo há botão login que, ao validar o usuario, entra no sistema (painel 2) e logo a baixo tem um botão para criar contas. Ao clicar no botão criar conta o usuario é direcionado para o painel de criação de contas (painel 5) onde é possível cadastrar usuarios.
+
+PAINEL 2
+
+- Painel de gerenciamento: Responsável por dar acessibilidade a todos os recursos do sistema bem como oferecer informações importantes como: investimento, faturamento real e lucro real (os quais constam no canto superior direito). Logo abaixo desses dados temos o botão detalhamento; O qual direciona o usuario para o painel de controle financeiro (painel 6). Abaixo deste temos o botão nova leva, o qual deleta todos os dados de produtos listados e vendidos. O botão nova leva deve ser clicado ao finalizar a campanha de venda dos produtos para o inicio de uma nova leva. Logo abaixo temos o botão adicionar item, que direciona para o painel de cadastro de produtos (painel 4). Logo abaixo temos o botão vender item, que nos leva ao painel de manegamento de produtos (painel 3). E mais a baixo ainda temos a data e a hora atual.
+
+PAINEL 3
+- Painel de manegamento de produtos: Responsável por gerir todos os produtos cadastrados no sistema. A esquerda temos uma lista dos produtos listados e a direita uma lista dos produtos vendidos. Podemos procurar itens por meio da barra de busca (cada qual para sua lista) ou por meio do botão filtros que abre as opções de filtros para buscar itens com as mesmas caracteristicas (no caso dos filtros vai valer para os dois paineis). Temos o botão alterar PV que altera o preço de venda de um produto (só vale para produtos listados), temos o botão vendido que passa o produto da lista de listados para a lista de vendidos, o botão devolução que passa da lista de vendidos para a lista de listados e obotão extraviar para caso a dona da loja queira tirar um produto para uso proprio ou presentear. Todas as operações atualizam os dados do sistema (investimento, faturamento esperado, faturamento real, etc). Quando um produto é clicado em qualquer uma das listas, seus dados são exibidos no canto inferior direito.
+
+PAINEL 4
+- Painel de cadastro de produtos: Responsável por cadastrar produtos. Nele o usuario vai escolher para que genero é direcionado o produto (masculino ou feminino), a categoria do produto (casaco, camiseta, tenis, acessorios, calça, meia ou roupa intima), nome do produto, preço de compra e preço de venda. A baixo tem um spinner para cadastrar varios produtos iguais. Com todo o formulario prenchido basta clicar em adicionar item.
+
+PAINEL 5
+- Painel de criação de contas: Onde as contas são criadas. Tem um formulario com usuário, email e senha. Basta prencher e clicar em cadastrar que o usuario será cadastrado.
+
+PAINEL 6
+- Painel de controle financeiro: Responsável por mostrar os dados financeiros da loja. Temos o investimento na primeira secção. Na segunda secção temos o faturamento real (centro), faturamento esperado (canto esquerdo) e percentual de quanto do faturamento real corresponde ao faturamento esperado. Na terceira secção temos o lucro (centro), lucro esperado (canto esquerdo) e perecentual de quanto do lucro real corresponde ao lucro esperado. Na quarta secção temos quantos itens foram extraviados (centro), preço de venda da soma dos itens extraviados e abaixo o preço de compra da soma dos itens extraviados.
+
+PAINEL 7
+- Painel de gerência de contas: Este painel é acessado com o usuario 'admin' e senha 'admin'. Serve para gerencias as contas cadastradas. Podendo excluir e alterar os atributos das contas. admin é um usuario padrão do sistema
+
+TRANSIÇÃO
+- Painel que serve como meio de rodar um gif para dar o efeito de transição. Ela entra, mosta o gif e da um Thread.sleep(930) para pausar o sistema por 0.93 segundos que é o tempo do gif rodar. Logo após ele passa para o proximo painel. O painel de transição roda quando faz login no sistema (transiciona entre o painel 1 e o painel 2)
+
+EXPLICAÇÕES ADICIONAIS
+
+COMO OS ARQUIVOS SÃO SALVOS
+- os produtos são serializados em um arquivo e as contas são serializadas em outro. Para que quando entrar uma nova leva, os produtos sejam deletados mas os usuarios continuem cadastrados. Usuarios só podem ser deletados ou alterados por meio do admin.
+
+USUARIO ADMIN
+- O usuario admin serve para alterar e remover contas. Ele é um usuario padrao do sistema. Portanto nao pode ser alterado ou deletado. No contexto de ser um programa de uso pessoal não achei necessário criar recursos avançados para este fim, somente um simples painel de controle de contas que pode ser acessado ao colocar como usuario e senha 'admin' e 'admin'.

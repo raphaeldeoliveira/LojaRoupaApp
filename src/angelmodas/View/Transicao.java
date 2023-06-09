@@ -13,9 +13,7 @@ public class Transicao extends javax.swing.JPanel implements Runnable {
         catch (Exception e) {
             e.printStackTrace();
         }
-        
         controller.rodarTransicao();
-
     }
     
     public Transicao() {
@@ -41,7 +39,6 @@ public class Transicao extends javax.swing.JPanel implements Runnable {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -37,8 +37,6 @@ public class Painel3 extends javax.swing.JPanel {
     
     public Painel3() {
         initComponents();
-        //LojaApp.controller.substituirModelo();
-        //LojaApp.controller.substituirModelo2();
         jPanel2.setVisible(false);
         adicionarBotoes();
         config();
@@ -231,10 +229,8 @@ public class Painel3 extends javax.swing.JPanel {
         paneExtraviar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 int index1 = jList1.getSelectedIndex();
                 int index2 = jList2.getSelectedIndex();
-                
                 controller.extraviar(index1, index2);
             }
         });
@@ -242,10 +238,8 @@ public class Painel3 extends javax.swing.JPanel {
         paneDevolucao.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 int index1 = jList1.getSelectedIndex();
                 int index2 = jList2.getSelectedIndex();
-                
                 controller.devolucao(index1, index2);
             }
         });
@@ -253,19 +247,15 @@ public class Painel3 extends javax.swing.JPanel {
         paneVendido.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 int index1 = jList1.getSelectedIndex();
                 int index2 = jList2.getSelectedIndex();
-                
                 controller.vendido(index1, index2);
-                
             }
         });
         
         paneFiltros.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 // os filtros serão aplicados as duas listas
                 if (mostrarFiltro == 0) {
                     buttonGroup1.clearSelection();
@@ -282,24 +272,20 @@ public class Painel3 extends javax.swing.JPanel {
                     paneFiltrar.setVisible(false);
                     paneFiltros.setBackground(new Color(217,50,128));
                     mostrarFiltro--;
-                } 
-                
+                }
             }
         });
         
         paneFiltrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 controller.filtrar(jRadioButton1, jRadioButton2, jRadioButton3, jRadioButton4, jRadioButton5, jRadioButton6, jRadioButton7, jRadioButton8, jRadioButton9);
-                
             }
         });
         
         paneAlterarPrecoVenda.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 int index1 = jList1.getSelectedIndex();
                 int index2 = jList2.getSelectedIndex();
                 controller.alterarPrecoVenda(index1, index2);
@@ -738,18 +724,14 @@ public class Painel3 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-        
        int index = jList1.getSelectedIndex();
-        
        controller.cliqueJlist1(index);
-       
        jList2.clearSelection();
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         // botao de busca da lista de produtos listados
         jTextField1.setText("");
-        
         controller.substituirModelo();
     }//GEN-LAST:event_jTextField1MouseClicked
 
@@ -758,36 +740,28 @@ public class Painel3 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        
         // barra de busca - key release - LISTADOS
         jTextField1.setForeground(Color.BLACK);
         busca = jTextField1.getText();
-        
         controller.filtrarBarraDeBuscaKeyReleaseListados(busca, evt);
-        
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         // barra de busca itens listados - focus LOST
         jTextField1.setForeground(new Color(153, 153, 153));
-        
         jTextField1.setText("Barra de busca");
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
         // LISTA DE VENDIDOS
         String selecionado = jList2.getSelectedValue();
-        
         controller.cliqueJlist2(selecionado);
-        
         jList1.clearSelection();
-        
     }//GEN-LAST:event_jList2MouseClicked
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         // botao de busca da lista de produtos vendidos
         jTextField2.setText("");
-        
         // troca o model da lista por um model vazio
         controller.substituirModelo2();
     }//GEN-LAST:event_jTextField2MouseClicked
@@ -796,16 +770,13 @@ public class Painel3 extends javax.swing.JPanel {
         // barra de busca - key release - VENDIDOS
         jTextField2.setForeground(Color.BLACK);
         busca = jTextField2.getText();
-        
         controller.filtrarBarraDeBuscaKeyReleaseVendidos(busca, evt);
     }//GEN-LAST:event_jTextField2KeyReleased
 
     private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
         jTextField2.setForeground(new Color(153, 153, 153));
-        
         jTextField2.setText("Barra de busca");
     }//GEN-LAST:event_jTextField2FocusLost
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

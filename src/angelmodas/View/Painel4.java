@@ -102,12 +102,10 @@ public class Painel4 extends javax.swing.JPanel {
         paneAdicionarItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 String nomeProduto = jTextField1.getText();
                 String pcstring = jTextField2.getText();
                 String pvstring = jTextField3.getText();
                 int quantidade = (int) jSpinner1.getValue();
-                
                 controller.adicionarItem(nomeProduto, pcstring, pvstring, quantidade, jRadioButton3, jRadioButton4, jRadioButton5, jRadioButton6, jRadioButton7, jRadioButton8, jRadioButton9, jRadioButton10, jRadioButton11);
             }
         });
@@ -403,7 +401,6 @@ public class Painel4 extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup2;

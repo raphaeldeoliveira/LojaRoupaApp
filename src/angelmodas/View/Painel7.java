@@ -43,11 +43,6 @@ public class Painel7 extends javax.swing.JPanel {
         jList2.setSelectedIndex(lastIndex);
     }
     
-    /*public void carregarUsuariosAdicionados(String user) {
-        listaUsuarios.addElement(user);
-        jList2.setModel(listaUsuarios);
-    }*/
-    
     public void mostrarDadosUsuario(ArrayList<Usuario> usuarios, int index) {
         jRadioButton1.setText(usuarios.get(index).getUsuario());
         jRadioButton2.setText(usuarios.get(index).getEmail());
@@ -55,7 +50,6 @@ public class Painel7 extends javax.swing.JPanel {
     }
     
     public void carregarUsuarioAlterado(int index) {
-        // ???
         controller.carregarUsuarioAlterado(index);
     }
     
@@ -95,7 +89,6 @@ public class Painel7 extends javax.swing.JPanel {
         jPanel1.add(horizontal3);
         
         // Botões
-        
         labelBotaoDeletar.setForeground(Color.WHITE);
         labelBotaoDeletar.setBounds(100, 273, 200, 40);
         labelBotaoDeletar.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 18));
@@ -117,7 +110,6 @@ public class Painel7 extends javax.swing.JPanel {
         jPanel1.add(panelBotaoAlterar);
         
         // Cobertura 2
-        
         JPanel vertical3 = new JPanel();
         vertical3.setBounds(188, 370, 13, 40);
         vertical3.setBackground(new Color(217,50,128));
@@ -129,7 +121,6 @@ public class Painel7 extends javax.swing.JPanel {
         jPanel2.add(vertical4);
         
         // Botões 2
-        
         labelBotaoVoltar.setForeground(new Color(217,50,128));
         labelBotaoVoltar.setBounds(234, 375, 120, 30);
         labelBotaoVoltar.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
@@ -147,33 +138,25 @@ public class Painel7 extends javax.swing.JPanel {
         panelBotaoDeletar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 int index = jList2.getSelectedIndex();
                 controller.botaoDeletarUsuario(index);
-                
             }
-            
         });
         
         panelBotaoAlterar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 int index = jList2.getSelectedIndex();
                 controller.botaoAlterarUsuario(index, jRadioButton1, jRadioButton2, jRadioButton3);
-                
             }
         });
         
         panelBotaoVoltar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 controller.botaoVoltarP7();
-                
             }
         });
-        
     }
     
     public void setTextRadio(ArrayList<Usuario> usuarios, int index) {
@@ -298,12 +281,8 @@ public class Painel7 extends javax.swing.JPanel {
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
         // Jlist clicado
-        
         int index = jList2.getSelectedIndex();
-        
         controller.clicarJlist(index);
-        
-        
     }//GEN-LAST:event_jList2MouseClicked
 
 

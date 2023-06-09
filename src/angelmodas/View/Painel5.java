@@ -68,9 +68,7 @@ public class Painel5 extends javax.swing.JPanel {
         paneVoltar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
                 controller.botaoVoltarP5();
-                
             }
         });
         
@@ -81,7 +79,6 @@ public class Painel5 extends javax.swing.JPanel {
                 String usuario = jTextField1.getText();
                 String email = jTextField3.getText();
                 String senha = jTextField2.getText();
-
                 controller.cadastrarUsuario(usuario, email, senha);
             }
         });
@@ -236,7 +233,6 @@ public class Painel5 extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -35,7 +34,6 @@ import angelmodas.View.Transicao;
 
 public class Controller {
     
-    // Objetos das views
     private Janela janela;
     private Transicao t1;
     private Painel1 p1;
@@ -46,38 +44,28 @@ public class Controller {
     private Painel6 p6 = new Painel6();
     private Painel7 p7 = new Painel7();
     
-    // objetos dos models
-    private ArrayList<Produto> produtosListados;
-    private ArrayList<Produto> produtosVendidos;
+    private ArrayList<Produto> produtosListados, produtosVendidos;
     private ArrayList<Usuario> usuarios;
     
     private DefaultListModel<String> listaProdutosListados, listaProdutosListadosVazia, listaProdutosListadosTemp, 
             listaProdutosVendidos, listaProdutosVendidosVazia, listaProdutosVendidosTemp, listaUsuarios; 
     
-    // variaveis padrão
-    private float investimento, faturamentoReal, lucroReal, faturamentoEsperado, lucroEsperado;
+    private float investimento, faturamentoReal, lucroReal, faturamentoEsperado, lucroEsperado, somatorioPVExtraviados, somatorioPCExtraviados;
     
-    // variaveis do p6
     private int quantidadeExtraviados, porcentagemFaturamento, porcentagemLucro;
-    private float somatorioPVExtraviados, somatorioPCExtraviados;
     
-    //Construtor.
     public Controller() {
-        this.janela = new Janela();                //Inicializa o frame.
-        this.janela.setLocationRelativeTo(null);   //Posiciona no meio da tela.
+        this.janela = new Janela();
+        this.janela.setLocationRelativeTo(null);
     }
     
     public void start() {
         this.startModel();
-        
         this.p1 = new Painel1();
         this.mostrarTela(this.p1);
-        
         this.janela.setVisible(true);
-        
         desserializar();
         desserialziarUsuarios();
-        
         definirData();
         iniciarRelogio();
     }
@@ -94,8 +82,6 @@ public class Controller {
         this.listaProdutosVendidosVazia = new DefaultListModel();
         this.listaProdutosVendidosTemp = new DefaultListModel();
         this.listaUsuarios = new DefaultListModel(); 
-        
-        
     }
     
     public void mostrarTela(JPanel newPanel) {
@@ -111,7 +97,6 @@ public class Controller {
         String nomeDoArquivo = "dados.ser";
         
         // pega os dados e bota no objeto
-        
         dado.setProdutosListados(this.produtosListados);
         dado.setProdutosVendidos(this.produtosVendidos);
         
@@ -131,7 +116,6 @@ public class Controller {
             out.writeObject(dado);
             out.close();
             arquivo.close();
-            
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -139,14 +123,12 @@ public class Controller {
     }
     
     public void desserializar() {
-        
         // verifica se o arquivo serializado existe. Se existir desserializa
         String caminhoArquivo = "dados.ser";
         File arquivoTeste = new File(caminhoArquivo);
         
         if (arquivoTeste.exists() == true) {
             // pega o arquivo e atribui os arrayList deles nos dessa classe
-        
             Dados dadosSerializados = null;
             String nomeDoArquivo = "dados.ser";
 
@@ -182,7 +164,7 @@ public class Controller {
                     listaProdutosListados.addElement(produtosListados.get(i).getNome());
                 }
                 for (int i=0;i<produtosVendidos.size();i++) {
-                    listaProdutosVendidos.addElement(produtosListados.get(i).getNome());
+                    listaProdutosVendidos.addElement(produtosVendidos.get(i).getNome());
                 }
                 this.p3.atualizarJlist1(listaProdutosListados);
                 this.p3.atualizarJlist2(listaProdutosVendidos);
@@ -203,7 +185,6 @@ public class Controller {
     }
     
     public void serializarUsuarios() {
-        
         // instancia a classe de serialização
         Usuarios usuariosSerializados = new Usuarios();
         // cria o nome do arquivo de serialização
@@ -217,13 +198,11 @@ public class Controller {
             ObjectOutputStream out = new ObjectOutputStream(arquivo);
             out.writeObject(usuarios);
             out.close();
-            arquivo.close();
-            
+            arquivo.close();    
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-        
     }
     
     public void prencherListaUsuarios() {
@@ -233,12 +212,10 @@ public class Controller {
     }
     
     public void desserialziarUsuarios() {
-        
         String caminhoArquivo = "usuarios.ser";
         File arquivoTeste = new File(caminhoArquivo);
         
         if (arquivoTeste.exists() == true) {
-            
             //Usuarios usuariosSerializados = null;
             ArrayList<Usuario> usuariosSerializados = null;
             String nomeDoArquivo = "usuarios.ser";
@@ -253,11 +230,8 @@ public class Controller {
 
                 // atribui aos arrayList o que esta no arquivo serializado
                 usuarios = usuariosSerializados;
-                
                 prencherListaUsuarios();
-                
                 this.p7.setarModeloJlist2(listaUsuarios);
-
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -265,9 +239,7 @@ public class Controller {
                 Logger.getLogger(angelmodas.View.Janela.class.getName()).log(Level.SEVERE, null, ex);
                 ex.printStackTrace();
             }
-            
         }
-        
     }
     
     // ================================================ transição =====================================================
@@ -279,7 +251,6 @@ public class Controller {
     // =============================================== metodos p1 =====================================================
     
     public void logar(String user, String senha) {
-        
         if (user.equals("admin") && senha.equals("admin")) {
             this.mostrarTela(this.p7);
         }
@@ -289,13 +260,10 @@ public class Controller {
             }
             else {
                 t1 = new Transicao();
-                
                 // Transição
                 this.mostrarTela(this.t1);
-
                 Thread thread = new Thread(this.t1);
                 thread.start();
-
             }
         }
     }
@@ -324,11 +292,9 @@ public class Controller {
     public void definirData() {
         // Obter a data atual
         LocalDate dataAtual = LocalDate.now();
-        
         // Formatar a data atual
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dataFormatada = dataAtual.format(formato);
-        
         this.p2.atualizarData(dataFormatada);
     }
     
@@ -354,15 +320,12 @@ public class Controller {
             time = time.concat("0");
         }
         time = time.concat(String.valueOf(segundo));
-        
         this.p2.atualizarHoraAtual(time);
     }
     
     public void botaoNovaLevaProdutos(int resposta) {
         if (resposta == JOptionPane.YES_OPTION) {
             // remove todos os dados que são serializados
-
-            // pega o arquivo serializado
             File arquivo = new File("dados.ser");
             arquivo.delete();
             System.exit(0);
@@ -393,7 +356,6 @@ public class Controller {
     
     public void extraviar(int index1, int index2) {
         // botão extraviar
-                
         if (index2 >= 0) {
             JOptionPane.showMessageDialog(null, "Não é possível extraviar itens vendidos!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
         }
@@ -403,7 +365,6 @@ public class Controller {
             }
             else {
                 int index = index1;
-
                 if (iniciou == true) {
                     // pega do listaProdutosListadosVazia
                     String produtoFiltrado = listaProdutosListadosVazia.get(index);
@@ -417,15 +378,12 @@ public class Controller {
                     // remove do filtro atual e atualiza o jlist
                     listaProdutosListadosVazia.remove(oldIndex);
                     this.p3.atualizarJlist1(listaProdutosListadosVazia);
-
                     // se tiver dois produtos com o mesmo nome, vai mexer no ultimo
                 }
                 // pega do listaProdutosListados
                 String produto = listaProdutosListados.get(index);
-
                 // remove o produto de lista com o defaultListModel
                 listaProdutosListados.remove(index);
-
                 // atualiza os models
                 if (iniciou == false) {
                     this.p3.atualizarJlist1(listaProdutosListados);
@@ -462,9 +420,7 @@ public class Controller {
                 JOptionPane.showMessageDialog(null, "Algum produto deve ser selecionado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
             }
             else {
-
                 int index = index2;
-
                 if (iniciou2 == true) {
                     // pega do listaProdutosListadosVazia
                     String produtoFiltrado = listaProdutosVendidosVazia.get(index);
@@ -515,17 +471,13 @@ public class Controller {
 
                 // atualiza o painel detalhamento (p6)
                 this.p6.atualizarValores(quantidadeExtraviados, somatorioPVExtraviados, somatorioPCExtraviados, investimento, faturamentoEsperado, lucroEsperado, faturamentoReal, lucroReal, porcentagemFaturamento, porcentagemLucro);
-                
             }
         }
         iniciou = false;
     }
     
     public void vendido(int index1, int index2) {
-        
-        // botão vendido
         // verifica se tem algum item selecionado na lista
-
         if (index2 >= 0) {
             JOptionPane.showMessageDialog(null, "Não é possível vender itens vendidos!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
             return;
@@ -536,9 +488,7 @@ public class Controller {
                  return;
              }
              else {
-
                 int index = index1;
-
                 if (iniciou == true) {
                     // pega do listaProdutosListadosVazia
                     String produtoFiltrado = listaProdutosListadosVazia.get(index);
@@ -553,9 +503,6 @@ public class Controller {
                     listaProdutosListadosVazia.remove(oldIndex);
                     this.p3.atualizarJlist1(listaProdutosListadosVazia);
                     // se tiver dois produtos com o mesmo nome, vai mexer no ultimo
-                }
-                else {
-
                 }
                 // pega do listaProdutosListados
                 String produto = listaProdutosListados.get(index);
@@ -594,16 +541,13 @@ public class Controller {
 
                 // faz a serialização
                 this.serializar();
-
              }
         }
-        
     }
     
     JRadioButton buttonTemp, buttonTemp2;
     
     public void filtrar(JRadioButton jRadioButton1, JRadioButton jRadioButton2, JRadioButton jRadioButton3, JRadioButton jRadioButton4, JRadioButton jRadioButton5, JRadioButton jRadioButton6, JRadioButton jRadioButton7, JRadioButton jRadioButton8, JRadioButton jRadioButton9) {
-        
         String genero = "";
         String categoria = "";
 
@@ -679,7 +623,6 @@ public class Controller {
         else {
             if (!genero.equals("") && !categoria.equals("")) {
                 // faz a pesquisa com dois filtros
-
                 for (int i=0;i<listaProdutosListados.size();i++) {
                     // vai ter que mexer no arrayList, pra pegar os atributos
                     // se os filtros aplicarem certo (pelo array) ele joga na lista vazia (temporaria)
@@ -687,26 +630,20 @@ public class Controller {
                         listaProdutosListadosVazia.addElement(listaProdutosListados.get(i));
                     }
                 }
-
                 for (int i=0;i<listaProdutosVendidos.size();i++) {
                     if (this.produtosVendidos.get(i).getCategoria().equals(categoria) && this.produtosVendidos.get(i).getGenero().equals(genero)) {
                         listaProdutosVendidosVazia.addElement(listaProdutosVendidos.get(i));
                     }
                 }
-
             }
             else {
                 if (genero.equals("")) {
                     // faz busca só pela categoria
-
                     for (int i=0;i<listaProdutosListados.size();i++) {
-
                         if (this.produtosListados.get(i).getCategoria().equals(categoria)) {
                             listaProdutosListadosVazia.addElement(listaProdutosListados.get(i));
                         }
-
                     }
-
                     for (int i=0;i<listaProdutosVendidos.size();i++) {
                         if (this.produtosVendidos.get(i).getCategoria().equals(categoria)) {
                             listaProdutosVendidosVazia.addElement(listaProdutosVendidos.get(i));
@@ -716,13 +653,10 @@ public class Controller {
                 else {
                     if (categoria.equals("")) {
                         // faz a busca só pelo genero
-
                         for (int i=0;i<listaProdutosListados.size();i++) {
-
                             if (this.produtosListados.get(i).getGenero().equals(genero)) {
                                 listaProdutosListadosVazia.addElement(listaProdutosListados.get(i));
                             }
-
                         }
                         for (int i=0;i<listaProdutosVendidos.size();i++) {
                             if (this.produtosVendidos.get(i).getGenero().equals(genero)) {
@@ -736,16 +670,13 @@ public class Controller {
             // atualiza o jlist
             this.p3.atualizarJlist1(listaProdutosListadosVazia);
             this.p3.atualizarJlist2(listaProdutosVendidosVazia);
-        }
-        
+        }        
     }
     
     public void alterarPrecoVenda(int index1, int index2) {
-        
         float lastPreco = -1;
         float novoPV = -1;
         int index = -1;
-
         if (index2 >= 0) {
             JOptionPane.showMessageDialog(null, "O produto deve estar listado para ter o preço alterado!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
         }
@@ -755,7 +686,6 @@ public class Controller {
             }
             else {
                 index = index1;
-
                 // verifica se esta com a lista filtrada ou na padrao
                 if (iniciou == true) {
                     // encontra o index equivalente na lista padrao
@@ -795,10 +725,8 @@ public class Controller {
 
                 // atualiza o card de informações a direita
                 this.p3.mostrarDetalhesProdutos(produtosListados, index);
-                
             }
         }
-        
     }
     
     public void cliqueJlist1(int index) {
@@ -813,8 +741,7 @@ public class Controller {
                }
            }
        }
-        
-        this.p3.mostrarDetalhesProdutos(produtosListados, index);
+       this.p3.mostrarDetalhesProdutos(produtosListados, index);
     }
     
     public void cliqueJlist2(String selecionado) {
@@ -835,7 +762,6 @@ public class Controller {
     }
     
     public void filtrarBarraDeBuscaKeyReleaseListados (String busca, java.awt.event.KeyEvent evt) {
-        
         if (busca.equals("")) {
             this.p3.atualizarJlist1(listaProdutosListados);
             this.listaProdutosListadosVazia.removeAllElements();
@@ -847,7 +773,6 @@ public class Controller {
                 // executa pra somente um caracter
                 if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                     for (int i=0;i<listaProdutosListadosTemp.size();i++) {
-                        
                         if (String.valueOf(listaProdutosListadosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                             listaProdutosListadosVazia.addElement(listaProdutosListadosTemp.get(i));
                             listaProdutosListadosTemp.remove(i);
@@ -857,23 +782,19 @@ public class Controller {
                     }
                 }
                 else {
-                    
                     int tamanhoLista = listaProdutosListadosVazia.size();
                     for (int i = tamanhoLista - 1; i >= 0; i--) {
                         if (!String.valueOf(listaProdutosListadosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
-                            
                             listaProdutosListadosTemp.addElement(listaProdutosListadosVazia.get(i));
                             //listaProdutosVazia.remove(i);
                         }
                     }
-                    
                     for (int i=0;i<listaProdutosListadosTemp.size();i++) {
                         String item = listaProdutosListadosTemp.get(i);
                         listaProdutosListadosVazia.removeElement(item);
                     }
                     this.p3.atualizarJlist1(listaProdutosListadosVazia);
                 }
-                
             }
             else {
                 for (int i=0;i<listaProdutosListados.size();i++) {
@@ -885,11 +806,9 @@ public class Controller {
                 }
             }
         }
-        
     }
     
     public void filtrarBarraDeBuscaKeyReleaseVendidos(String busca, java.awt.event.KeyEvent evt) {
-        
         if (busca.equals("")) {
             this.p3.atualizarJlist2(listaProdutosVendidos);
             listaProdutosVendidosVazia.removeAllElements();
@@ -901,7 +820,6 @@ public class Controller {
                 // executa pra somente um caracter
                 if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                     for (int i=0;i<listaProdutosVendidosTemp.size();i++) {
-                        
                         if (String.valueOf(listaProdutosVendidosTemp.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
                             listaProdutosVendidosVazia.addElement(listaProdutosVendidosTemp.get(i));
                             listaProdutosVendidosTemp.remove(i);
@@ -911,7 +829,6 @@ public class Controller {
                     }
                 }
                 else {
-                    
                     int tamanhoLista = listaProdutosVendidosVazia.size();
                     for (int i = tamanhoLista - 1; i >= 0; i--) {
                         if (!String.valueOf(listaProdutosVendidosVazia.get(i).toLowerCase().charAt(busca.length()-1)).equals(String.valueOf(busca.charAt(busca.length()-1)).toLowerCase())) {
@@ -920,14 +837,12 @@ public class Controller {
                             //listaProdutosVazia.remove(i);
                         }
                     }
-                    
                     for (int i=0;i<listaProdutosVendidosTemp.size();i++) {
                         String item = listaProdutosVendidosTemp.get(i);
                         listaProdutosVendidosVazia.removeElement(item);
                     }
                     this.p3.atualizarJlist2(listaProdutosVendidosVazia);
                 }
-                
             }
             else {
                 for (int i=0;i<listaProdutosVendidos.size();i++) {
@@ -939,7 +854,6 @@ public class Controller {
                 }
             }
         }
-        
     }
     
     public void adicionarItensSerializados() {
@@ -948,7 +862,6 @@ public class Controller {
                 listaProdutosListados.addElement(this.produtosListados.get(i).getNome());
             }
         }
-        
         if (this.produtosVendidos != null) {
             for (int i=0;i<this.produtosVendidos.size();i++) {
                 listaProdutosVendidos.addElement(this.produtosVendidos.get(i).getNome());
@@ -965,7 +878,6 @@ public class Controller {
     // =============================================== metodos p4 =====================================================
     
     public void adicionarItem(String nomeProduto, String pcstring, String pvstring, int quantidade, JRadioButton jRadioButton3, JRadioButton jRadioButton4, JRadioButton jRadioButton5, JRadioButton jRadioButton6, JRadioButton jRadioButton7, JRadioButton jRadioButton8, JRadioButton jRadioButton9, JRadioButton jRadioButton10, JRadioButton jRadioButton11) {
-        
         String categoria = "";
         String genero = "";
         float precoCompra;
@@ -1059,10 +971,8 @@ public class Controller {
 
                 // limpa os textFields
                 this.p4.limparCampos();
-
             }
         }
-        
     }
     
     public void botaoVoltarP4() {
@@ -1072,11 +982,11 @@ public class Controller {
     // =============================================== metodos p5 =====================================================
     
     public void botaoVoltarP5() {
+        this.p1.deixarTextFieldsPadrao();
         this.mostrarTela(this.p1);
     }
     
     public void cadastrarUsuario(String usuario, String email, String senha) {
-        
         // verifica se os campos foram preenchidos corertamente
         if (usuario.trim().isEmpty() || email.trim().isEmpty() || senha.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser prenchidos!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
@@ -1105,10 +1015,7 @@ public class Controller {
             // atualiza o painel de usuarios cadastrados (p7)
             this.p7.setarModeloJlist2(this.listaUsuarios);
         }
-        
     }
-    
-    
     
     // =============================================== metodos p6 =====================================================
     
@@ -1166,19 +1073,16 @@ public class Controller {
         else {
             int resposta = JOptionPane.showOptionDialog(null,"Tem certeza que deseja deletar usuario?","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
             if (resposta == JOptionPane.YES_OPTION) {
-
                 this.usuarios.remove(index);
                 this.serializarUsuarios();
                 listaUsuarios.remove(index);
                 this.p7.setarModeloJlist2(listaUsuarios);
-
             }
             this.p7.limparCampos();
         }
     }
     
     public void botaoAlterarUsuario(int index, JRadioButton jRadioButton1, JRadioButton jRadioButton2, JRadioButton jRadioButton3) {
-        
         if (index < 0) {
             if (lastIndex > 0) {
                 index = lastIndex;
@@ -1186,7 +1090,6 @@ public class Controller {
         }
         else {
             lastIndex = index;
-
             if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected() && !jRadioButton3.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Selecione algum atributo do usuario para alterar!", "Angel Modas", JOptionPane.ERROR_MESSAGE);
             }
@@ -1221,14 +1124,11 @@ public class Controller {
                         }
                     }
                 }
-
                 this.serializarUsuarios();
                 carregarUsuarioAlterado(index);
                 this.p7.deixarIndexSelecionado(lastIndex);
-
             }
         }
-                
     }
     
     public void botaoVoltarP7() {
@@ -1241,5 +1141,4 @@ public class Controller {
             this.p7.setTextRadio(usuarios, index);
         }
     }
-    
 }

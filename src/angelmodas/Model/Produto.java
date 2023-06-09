@@ -20,7 +20,6 @@ public class Produto implements Serializable {
         this.precoVenda = precoVenda;
         this.categoria = categoria;
         this.genero = genero;
-        
         calcularLucro();
     }
 

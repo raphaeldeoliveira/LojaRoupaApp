@@ -160,7 +160,6 @@ public class Painel2 extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int resposta = JOptionPane.showOptionDialog(null,"Deseja continuar?\nTodos os dados serão apagados","Confirmação",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Sim", "Não", "Cancelar"},"Sim");
-        
                 controller.botaoNovaLevaProdutos(resposta);
             }
         });
@@ -339,7 +338,6 @@ public class Painel2 extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

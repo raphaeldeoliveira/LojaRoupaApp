@@ -23,7 +23,6 @@ public class AtualizarRelogio extends Thread {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            
         }
     }
     
