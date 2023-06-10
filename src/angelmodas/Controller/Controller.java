@@ -110,6 +110,9 @@ public class Controller {
         dado.setSomatorioPCExtraviados(this.somatorioPCExtraviados);
         dado.setSomatorioPVExtraviados(this.somatorioPVExtraviados);
         
+        dado.setPorcentagemFaturamento(this.porcentagemFaturamento);
+        dado.setPorcentagemLucro(this.porcentagemLucro);
+        
         try {
             FileOutputStream arquivo = new FileOutputStream(nomeDoArquivo);
             ObjectOutputStream out = new ObjectOutputStream(arquivo);
@@ -154,7 +157,10 @@ public class Controller {
                 this.quantidadeExtraviados = dadosSerializados.getQuantidadeExtraviados();
                 this.somatorioPCExtraviados = dadosSerializados.getSomatorioPCExtraviados();
                 this.somatorioPVExtraviados = dadosSerializados.getSomatorioPVExtraviados();
-
+                
+                this.porcentagemFaturamento = dadosSerializados.getPorcentagemFaturamento();
+                this.porcentagemLucro = dadosSerializados.getPorcentagemLucro();
+                
                 // metodo para atualizar as listas e carregar os itens serialziados
                 this.p6.atualizarValores(quantidadeExtraviados, somatorioPVExtraviados, somatorioPCExtraviados, investimento, faturamentoEsperado, lucroEsperado, faturamentoReal, lucroReal, porcentagemFaturamento, porcentagemLucro);
                 this.p2.atualizarValores(investimento, faturamentoReal, lucroReal);
@@ -463,11 +469,15 @@ public class Controller {
                 // deixa selecionado o primeiro produto da lista
                 this.p3.deixarPrimeiroIndexSelecionado2();
 
-                // faz a serialização
-                this.serializar();
-
                 // atualiza o painel de controle (p2)
                 this.p2.atualizarValores(investimento, faturamentoReal, lucroReal);
+                
+                // atualiza os percentuais
+                porcentagemFaturamento = Math.round((faturamentoReal * 100) / faturamentoEsperado);
+                porcentagemLucro = Math.round((lucroReal * 100) / lucroEsperado);;
+                
+                // faz a serialização
+                this.serializar();
 
                 // atualiza o painel detalhamento (p6)
                 this.p6.atualizarValores(quantidadeExtraviados, somatorioPVExtraviados, somatorioPCExtraviados, investimento, faturamentoEsperado, lucroEsperado, faturamentoReal, lucroReal, porcentagemFaturamento, porcentagemLucro);
@@ -717,6 +727,8 @@ public class Controller {
                     this.lucroEsperado = this.lucroEsperado - (lastPreco - novoPV);
                     this.faturamentoEsperado = this.faturamentoEsperado - (lastPreco - novoPV);
                 }
+                
+                atualizarPercentuais();
 
                 this.serializar();
 
@@ -1011,6 +1023,9 @@ public class Controller {
 
             // faz a serialização
             this.serializarUsuarios();
+            
+            this.listaUsuarios.removeAllElements();
+            carregarUsuarios();
 
             // atualiza o painel de usuarios cadastrados (p7)
             this.p7.setarModeloJlist2(this.listaUsuarios);

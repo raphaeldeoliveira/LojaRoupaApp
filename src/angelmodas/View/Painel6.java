@@ -25,7 +25,7 @@ public class Painel6 extends javax.swing.JPanel {
     JLabel numeroLucroEsperado = new JLabel("0");
     JLabel percentualLucro = new JLabel("0%");
     JLabel extravio = new JLabel("Extravio");
-    JLabel numeroExtravio = new JLabel("R$ 0.0");
+    JLabel numeroExtravio = new JLabel("0");
     JLabel precoCompraExtravio = new JLabel("R$ 0.0");
     JLabel precoVendaExtravio = new JLabel("R$ 0.0");
     

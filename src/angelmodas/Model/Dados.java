@@ -17,6 +17,9 @@ public class Dados implements Serializable {
     private int quantidadeExtraviados;
     private float somatorioPVExtraviados;
     private float somatorioPCExtraviados;
+    
+    private int porcentagemFaturamento;
+    private int porcentagemLucro;
 
     public Dados() {
     }
@@ -99,6 +102,22 @@ public class Dados implements Serializable {
 
     public void setSomatorioPCExtraviados(float somatorioPCExtraviados) {
         this.somatorioPCExtraviados = somatorioPCExtraviados;
+    }
+
+    public int getPorcentagemFaturamento() {
+        return porcentagemFaturamento;
+    }
+
+    public void setPorcentagemFaturamento(int porcentagemFaturamento) {
+        this.porcentagemFaturamento = porcentagemFaturamento;
+    }
+
+    public int getPorcentagemLucro() {
+        return porcentagemLucro;
+    }
+
+    public void setPorcentagemLucro(int porcentagemLucro) {
+        this.porcentagemLucro = porcentagemLucro;
     }
     
 }
